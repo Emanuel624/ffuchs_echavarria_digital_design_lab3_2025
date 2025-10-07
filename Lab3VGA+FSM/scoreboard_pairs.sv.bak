@@ -1,0 +1,45 @@
+//==============================================================
+// scoreboard_pairs.sv
+//  - Cuenta parejas por jugador (0..8).
+//  - Sube en update_score (pulso 1 ciclo) de la FSM.
+//  - Decide a quién sumar según current_player (0=P1, 1=P2).
+//  - Se limpia con rst_n=0 o start_game=1.
+//==============================================================
+module scoreboard_pairs #(
+  parameter bit FREEZE_ON_WIN = 1'b1   // si 1, no suma más tras show_winner
+)(
+  input  logic clk,
+  input  logic rst_n,
+
+  // Eventos/estado del juego
+  input  logic start_game,       // pulso/level para limpiar al iniciar
+  input  logic update_score,     // pulso: hubo match
+  input  logic current_player,   // 0: P1, 1: P2
+  input  logic show_winner,      // 1: juego terminó
+
+  // Salidas
+  output logic [3:0] p1_pairs,   // 0..8 (4 bits)
+  output logic [3:0] p2_pairs
+);
+  function automatic [3:0] inc_sat8 (input [3:0] v);
+    inc_sat8 = (v < 4'd8) ? (v + 4'd1) : v;
+  endfunction
+
+  always_ff @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+      p1_pairs <= 4'd0;
+      p2_pairs <= 4'd0;
+    end else begin
+      if (start_game) begin
+        p1_pairs <= 4'd0;
+        p2_pairs <= 4'd0;
+      end else if (!(FREEZE_ON_WIN && show_winner)) begin
+        if (update_score) begin
+          if (!current_player) p1_pairs <= inc_sat8(p1_pairs);
+          else                 p2_pairs <= inc_sat8(p2_pairs);
+        end
+      end
+    end
+  end
+endmodule
+

@@ -1,0 +1,81 @@
+module memoria_fpga_top (
+    input  logic        clk50,        // 50 MHz
+    input  logic [3:0]  SW,           // sel_idx[3:0]
+    input  logic        KEY0_n,       // START  (activo-bajo)
+    input  logic        KEY1_n,       // CLICK  (activo-bajo)
+    input  logic        RESET_n,      // reset global activo-bajo
+
+    // VGA
+    output logic        vgaclk,
+    output logic        hsync, vsync,
+    output logic        sync_b, blank_b,
+    output logic [7:0]  r, g, b
+);
+    // ---------------- Clocks VGA ----------------
+    pll u_pll(.inclk0(clk50), .c0(vgaclk)); // tu stub / IP real en placa
+
+    logic [9:0] x, y;
+    vgaController u_vgac (
+        .vgaclk (vgaclk),
+        .hsync  (hsync),
+        .vsync  (vsync),
+        .sync_b (sync_b),
+        .blank_b(blank_b),
+        .x      (x),
+        .y      (y)
+    );
+
+    // ---------------- Front-end de entrada ----------------
+    logic start_level, start_pulse;
+    logic click_level, click_pulse;
+
+    btn_debouncer #(.CNTR_BITS(18)) u_db_start (
+        .clk        (clk50),
+        .rst_n      (RESET_n),
+        .btn_n_raw  (KEY0_n),
+        .level      (start_level),
+        .rising_edge(start_pulse)
+    );
+
+    btn_debouncer #(.CNTR_BITS(18)) u_db_click (
+        .clk        (clk50),
+        .rst_n      (RESET_n),
+        .btn_n_raw  (KEY1_n),
+        .level      (click_level),
+        .rising_edge(click_pulse)
+    );
+
+    // ---------------- Lógica del juego ----------------
+    logic        show_winner_o;
+    logic [15:0] card_faceup_o, card_removed_o;
+
+    memory_game_top_bc #(
+      .TICKS_PER_TURN(300) // ajusta para 15 s reales si tu reloj lo permite
+    ) u_game (
+      .clk           (clk50),
+      .rst_n         (RESET_n),
+
+      .start_btn     (start_pulse),      // pulso limpio
+      .click_e       (click_pulse),      // pulso limpio
+      .sel_idx       (SW[3:0]),          // cursor desde switches
+
+      .show_winner_o (show_winner_o),
+      .card_faceup_o (card_faceup_o),
+      .card_removed_o(card_removed_o)
+    );
+
+    // ---------------- Video de juego ----------------
+    videoGen_game u_vgen (
+        .vgaclk      (vgaclk),
+        .blank_b     (blank_b),
+        .x           (x),
+        .y           (y),
+        .faceup_mask (card_faceup_o),
+        .removed_mask(card_removed_o),
+        .sel_idx     (SW[3:0]),
+        .show_winner (show_winner_o),
+        .r           (r),
+        .g           (g),
+        .b           (b)
+    );
+endmodule
