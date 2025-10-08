@@ -1,10 +1,5 @@
-//==============================================================
-// memory_game_top_bc.sv  (ACTUALIZADO)
-// - Expone current_player_o, p1_pairs_o, p2_pairs_o
-// - Integra scoreboard_pairs
-//==============================================================
 module memory_game_top_bc #(
-  parameter int TICKS_PER_TURN = 300
+  parameter int TICKS_PER_TURN = 300   // (ya no se usa con el timer 1 Hz)
 )(
   input  logic        clk,
   input  logic        rst_n,
@@ -24,7 +19,9 @@ module memory_game_top_bc #(
   output logic [3:0]  p1_pairs_o,
   output logic [3:0]  p2_pairs_o,
   // Código de ganador
-  output logic [1:0]  winner_code_o   // 0=none, 1=P1, 2=P2, 3=empate
+  output logic [1:0]  winner_code_o,   // 0=none, 1=P1, 2=P2, 3=empate
+  // Salida tiempo restante (para 7-seg)
+  output logic [7:0]  seconds_left_o
 );
 
   // ----------------------------
@@ -55,40 +52,66 @@ module memory_game_top_bc #(
   logic        turn_load_15, turn_start, turn_pause, turn_reset;
 
   // ----------------------------
-  // Temporizador de turno
+  // Temporizador de turno (1 Hz)
   // ----------------------------
-  logic        running_q, running_d;
-  logic [15:0] tick_q, tick_d;
+  // Declaraciones (deben existir antes de usarlas en los always)
+  logic        running_q;
+  logic [7:0]  seconds_q;       // 0..99 (usamos 15..0)
+  assign seconds_left_o = seconds_q;
+
+  // Prescaler 50 MHz -> 1 Hz
+  localparam int PS_MAX = 50_000_000 - 1;
+  logic [25:0] ps_cnt_q;
+  logic        tick_1hz;
 
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
-      running_q  <= 1'b0;
-      tick_q     <= 16'd0;
-      timer_done <= 1'b0;
+      ps_cnt_q <= '0;
+      tick_1hz <= 1'b0;
     end else begin
-      running_q  <= running_d;
-      tick_q     <= tick_d;
-      timer_done <= 1'b0;
-
-      if (turn_reset) begin
-        running_q <= 1'b0;
-        tick_q    <= 16'd0;
-      end else if (turn_load_15) begin
-        running_q <= 1'b0;
-        tick_q    <= TICKS_PER_TURN[15:0];
+      if (turn_pause || !running_q) begin
+        ps_cnt_q <= '0;
+        tick_1hz <= 1'b0;
+      end else if (ps_cnt_q == PS_MAX) begin
+        ps_cnt_q <= '0;
+        tick_1hz <= 1'b1;
       end else begin
-        if (turn_start) running_q <= 1'b1;
-        if (running_q && !turn_pause && tick_q != 16'd0) begin
-          tick_q <= tick_q - 16'd1;
-          if (tick_q == 16'd1) timer_done <= 1'b1;
-        end
+        ps_cnt_q <= ps_cnt_q + 26'd1;
+        tick_1hz <= 1'b0;
       end
     end
   end
 
-  always_comb begin
-    running_d = running_q;
-    tick_d    = tick_q;
+  // Contador de segundos y 'timer_done'
+  always_ff @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+      running_q  <= 1'b0;
+      seconds_q  <= 8'd0;
+      timer_done <= 1'b0;
+    end else begin
+      timer_done <= 1'b0;
+
+      if (turn_reset) begin
+        running_q <= 1'b0;
+        seconds_q <= 8'd0;
+
+      end else if (turn_load_15) begin
+        // Carga y, si 'turn_start' viene alto en el mismo ciclo, arranca.
+        seconds_q <= 8'd15;
+        running_q <= turn_start ? 1'b1 : running_q;
+
+      end else begin
+        // Si la FSM decide "start" en ciclo aparte, respétalo
+        if (turn_start) running_q <= 1'b1;
+
+        if (running_q && !turn_pause && tick_1hz) begin
+          if (seconds_q != 8'd0) begin
+            seconds_q <= seconds_q - 8'd1;
+            if (seconds_q == 8'd1) timer_done <= 1'b1; // pulso al pasar a 0
+          end
+        end
+      end
+    end
   end
 
   // ----------------------------
@@ -116,6 +139,8 @@ module memory_game_top_bc #(
   // ----------------------------
   // board_core
   // ----------------------------
+  logic can_flip_idx; // consulta para rnd_idx
+
   board_core u_board (
     .clk            (clk),
     .rst_n          (rst_n),
@@ -129,6 +154,8 @@ module memory_game_top_bc #(
     .unflip_ack     (unflip_ack),
     .remove_ack     (remove_ack),
     .all_pairs_done (all_pairs_done),
+    .idx_chk        (rnd_idx),          // consulta el índice aleatorio actual
+    .can_flip_idx   (can_flip_idx),     // respuesta combinacional
     .card_faceup    (card_faceup_o),
     .card_removed   (card_removed_o)
   );
@@ -182,7 +209,8 @@ module memory_game_top_bc #(
     .validate_cards    (validate_cards),
     .update_score      (update_score),
     .show_winner       (show_winner),
-    .state             (state_dbg)
+    .state             (state_dbg),
+    .can_flip_idx_any  (can_flip_idx)
   );
 
   // --- Scoreboard de parejas ---
@@ -215,3 +243,5 @@ module memory_game_top_bc #(
   assign current_player_o = current_player;
 
 endmodule
+
+

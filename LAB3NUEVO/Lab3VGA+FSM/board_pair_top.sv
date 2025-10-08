@@ -1,5 +1,6 @@
 //==============================================================
 // board_pair_top.sv  (TOP para TB de board_core + pair_check_rom)
+// - Actualizado: conecta idx_chk/can_flip_idx de board_core
 //==============================================================
 module board_pair_top (
     input  logic        clk,
@@ -23,6 +24,10 @@ module board_pair_top (
     output logic [15:0] card_faceup,
     output logic [15:0] card_removed,
 
+    // ---- Consulta arbitraria para AUTO pick ----
+    input  logic [3:0]  idx_chk,       // índice a verificar
+    output logic        can_flip_idx,  // 1 si idx_chk es flippable
+
     // ---- Señales para verificación de pareja ----
     input  logic [3:0]  idx_a,
     input  logic [3:0]  idx_b,
@@ -35,20 +40,25 @@ module board_pair_top (
     // board_core
     // -----------------------------
     board_core u_board (
-        .clk            (clk),
-        .rst_n          (rst_n),
-        .sel_idx        (sel_idx),
-        .act_idx        (act_idx),
-        .req_flip       (req_flip),
-        .req_unflip     (req_unflip),
-        .req_remove_pair(req_remove_pair),
-        .can_flip_sel   (can_flip_sel),
-        .flip_ack       (flip_ack),
-        .unflip_ack     (unflip_ack),
-        .remove_ack     (remove_ack),
-        .all_pairs_done (all_pairs_done),
-        .card_faceup    (card_faceup),
-        .card_removed   (card_removed)
+        .clk             (clk),
+        .rst_n           (rst_n),
+        .sel_idx         (sel_idx),
+        .act_idx         (act_idx),
+        .req_flip        (req_flip),
+        .req_unflip      (req_unflip),
+        .req_remove_pair (req_remove_pair),
+
+        .can_flip_sel    (can_flip_sel),
+        .flip_ack        (flip_ack),
+        .unflip_ack      (unflip_ack),
+        .remove_ack      (remove_ack),
+        .all_pairs_done  (all_pairs_done),
+
+        .idx_chk         (idx_chk),       // << nuevo
+        .can_flip_idx    (can_flip_idx),  // << nuevo
+
+        .card_faceup     (card_faceup),
+        .card_removed    (card_removed)
     );
 
     // -----------------------------
@@ -56,12 +66,12 @@ module board_pair_top (
     // -----------------------------
     pair_check_rom u_pair (
         .clk      (clk),
-        .rst_n    (rst_n),       // <— Faltaba
+        .rst_n    (rst_n),
         .start    (pair_start),
         .idx_a    (idx_a),
         .idx_b    (idx_b),
         .done     (pair_done),
-        .is_match (pair_match)   // <— Nombre correcto de la salida
+        .is_match (pair_match)
     );
 
 endmodule

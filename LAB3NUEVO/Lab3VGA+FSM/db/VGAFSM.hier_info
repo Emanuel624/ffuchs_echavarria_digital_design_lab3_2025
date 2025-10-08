@@ -60,6 +60,13 @@ HEX1[3] << hex7seg_active_low:u_hex_p2.seg
 HEX1[4] << hex7seg_active_low:u_hex_p2.seg
 HEX1[5] << hex7seg_active_low:u_hex_p2.seg
 HEX1[6] << hex7seg_active_low:u_hex_p2.seg
+HEX2[0] << hex7seg_active_low:u_hex_timer.seg
+HEX2[1] << hex7seg_active_low:u_hex_timer.seg
+HEX2[2] << hex7seg_active_low:u_hex_timer.seg
+HEX2[3] << hex7seg_active_low:u_hex_timer.seg
+HEX2[4] << hex7seg_active_low:u_hex_timer.seg
+HEX2[5] << hex7seg_active_low:u_hex_timer.seg
+HEX2[6] << hex7seg_active_low:u_hex_timer.seg
 
 
 |memoria_fpga_top|pll:u_pll
@@ -267,6 +274,14 @@ p2_pairs_o[2] <= scoreboard_pairs:u_score.p2_pairs
 p2_pairs_o[3] <= scoreboard_pairs:u_score.p2_pairs
 winner_code_o[0] <= winner_code_o.DB_MAX_OUTPUT_PORT_TYPE
 winner_code_o[1] <= winner_code_o.DB_MAX_OUTPUT_PORT_TYPE
+seconds_left_o[0] <= seconds_q[0].DB_MAX_OUTPUT_PORT_TYPE
+seconds_left_o[1] <= seconds_q[1].DB_MAX_OUTPUT_PORT_TYPE
+seconds_left_o[2] <= seconds_q[2].DB_MAX_OUTPUT_PORT_TYPE
+seconds_left_o[3] <= seconds_q[3].DB_MAX_OUTPUT_PORT_TYPE
+seconds_left_o[4] <= seconds_q[4].DB_MAX_OUTPUT_PORT_TYPE
+seconds_left_o[5] <= seconds_q[5].DB_MAX_OUTPUT_PORT_TYPE
+seconds_left_o[6] <= seconds_q[6].DB_MAX_OUTPUT_PORT_TYPE
+seconds_left_o[7] <= seconds_q[7].DB_MAX_OUTPUT_PORT_TYPE
 
 
 |memoria_fpga_top|memory_game_top_bc:u_game|board_core:u_board
@@ -348,17 +363,17 @@ sel_idx[2] => Mux0.IN1
 sel_idx[2] => Mux1.IN1
 sel_idx[3] => Mux0.IN0
 sel_idx[3] => Mux1.IN0
-act_idx[0] => Mux2.IN3
-act_idx[0] => Mux3.IN3
+act_idx[0] => Mux4.IN3
+act_idx[0] => Mux5.IN3
 act_idx[0] => Decoder0.IN3
-act_idx[1] => Mux2.IN2
-act_idx[1] => Mux3.IN2
+act_idx[1] => Mux4.IN2
+act_idx[1] => Mux5.IN2
 act_idx[1] => Decoder0.IN2
-act_idx[2] => Mux2.IN1
-act_idx[2] => Mux3.IN1
+act_idx[2] => Mux4.IN1
+act_idx[2] => Mux5.IN1
 act_idx[2] => Decoder0.IN1
-act_idx[3] => Mux2.IN0
-act_idx[3] => Mux3.IN0
+act_idx[3] => Mux4.IN0
+act_idx[3] => Mux5.IN0
 act_idx[3] => Decoder0.IN0
 req_flip => state_q.OUTPUTSELECT
 req_flip => state_q.OUTPUTSELECT
@@ -466,7 +481,16 @@ can_flip_sel <= can_flip_sel.DB_MAX_OUTPUT_PORT_TYPE
 flip_ack <= flip_ack~reg0.DB_MAX_OUTPUT_PORT_TYPE
 unflip_ack <= unflip_ack~reg0.DB_MAX_OUTPUT_PORT_TYPE
 remove_ack <= remove_ack~reg0.DB_MAX_OUTPUT_PORT_TYPE
-all_pairs_done <= Equal33.DB_MAX_OUTPUT_PORT_TYPE
+all_pairs_done <= Equal34.DB_MAX_OUTPUT_PORT_TYPE
+idx_chk[0] => Mux2.IN3
+idx_chk[0] => Mux3.IN3
+idx_chk[1] => Mux2.IN2
+idx_chk[1] => Mux3.IN2
+idx_chk[2] => Mux2.IN1
+idx_chk[2] => Mux3.IN1
+idx_chk[3] => Mux2.IN0
+idx_chk[3] => Mux3.IN0
+can_flip_idx <= can_flip_idx.DB_MAX_OUTPUT_PORT_TYPE
 card_faceup[0] <= Equal1.DB_MAX_OUTPUT_PORT_TYPE
 card_faceup[1] <= Equal2.DB_MAX_OUTPUT_PORT_TYPE
 card_faceup[2] <= Equal3.DB_MAX_OUTPUT_PORT_TYPE
@@ -483,22 +507,22 @@ card_faceup[12] <= Equal13.DB_MAX_OUTPUT_PORT_TYPE
 card_faceup[13] <= Equal14.DB_MAX_OUTPUT_PORT_TYPE
 card_faceup[14] <= Equal15.DB_MAX_OUTPUT_PORT_TYPE
 card_faceup[15] <= Equal16.DB_MAX_OUTPUT_PORT_TYPE
-card_removed[0] <= Equal17.DB_MAX_OUTPUT_PORT_TYPE
-card_removed[1] <= Equal18.DB_MAX_OUTPUT_PORT_TYPE
-card_removed[2] <= Equal19.DB_MAX_OUTPUT_PORT_TYPE
-card_removed[3] <= Equal20.DB_MAX_OUTPUT_PORT_TYPE
-card_removed[4] <= Equal21.DB_MAX_OUTPUT_PORT_TYPE
-card_removed[5] <= Equal22.DB_MAX_OUTPUT_PORT_TYPE
-card_removed[6] <= Equal23.DB_MAX_OUTPUT_PORT_TYPE
-card_removed[7] <= Equal24.DB_MAX_OUTPUT_PORT_TYPE
-card_removed[8] <= Equal25.DB_MAX_OUTPUT_PORT_TYPE
-card_removed[9] <= Equal26.DB_MAX_OUTPUT_PORT_TYPE
-card_removed[10] <= Equal27.DB_MAX_OUTPUT_PORT_TYPE
-card_removed[11] <= Equal28.DB_MAX_OUTPUT_PORT_TYPE
-card_removed[12] <= Equal29.DB_MAX_OUTPUT_PORT_TYPE
-card_removed[13] <= Equal30.DB_MAX_OUTPUT_PORT_TYPE
-card_removed[14] <= Equal31.DB_MAX_OUTPUT_PORT_TYPE
-card_removed[15] <= Equal32.DB_MAX_OUTPUT_PORT_TYPE
+card_removed[0] <= Equal18.DB_MAX_OUTPUT_PORT_TYPE
+card_removed[1] <= Equal19.DB_MAX_OUTPUT_PORT_TYPE
+card_removed[2] <= Equal20.DB_MAX_OUTPUT_PORT_TYPE
+card_removed[3] <= Equal21.DB_MAX_OUTPUT_PORT_TYPE
+card_removed[4] <= Equal22.DB_MAX_OUTPUT_PORT_TYPE
+card_removed[5] <= Equal23.DB_MAX_OUTPUT_PORT_TYPE
+card_removed[6] <= Equal24.DB_MAX_OUTPUT_PORT_TYPE
+card_removed[7] <= Equal25.DB_MAX_OUTPUT_PORT_TYPE
+card_removed[8] <= Equal26.DB_MAX_OUTPUT_PORT_TYPE
+card_removed[9] <= Equal27.DB_MAX_OUTPUT_PORT_TYPE
+card_removed[10] <= Equal28.DB_MAX_OUTPUT_PORT_TYPE
+card_removed[11] <= Equal29.DB_MAX_OUTPUT_PORT_TYPE
+card_removed[12] <= Equal30.DB_MAX_OUTPUT_PORT_TYPE
+card_removed[13] <= Equal31.DB_MAX_OUTPUT_PORT_TYPE
+card_removed[14] <= Equal32.DB_MAX_OUTPUT_PORT_TYPE
+card_removed[15] <= Equal33.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |memoria_fpga_top|memory_game_top_bc:u_game|pair_check_rom:u_pair
@@ -632,32 +656,10 @@ rnd_idx[2] => idx_target.DATAB
 rnd_idx[3] => Equal1.IN0
 rnd_idx[3] => idx_target.DATAB
 rnd_idx[3] => idx_target.DATAB
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
-rnd_valid => ns.OUTPUTSELECT
+rnd_valid => always1.IN0
 rnd_valid => always1.IN1
+can_flip_idx_any => always1.IN1
+can_flip_idx_any => always1.IN1
 can_flip_sel => always1.IN1
 flip_ack => ns.OUTPUTSELECT
 flip_ack => ns.OUTPUTSELECT
@@ -902,6 +904,20 @@ seg[6] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |memoria_fpga_top|hex7seg_active_low:u_hex_p2
+hex[0] => Decoder0.IN3
+hex[1] => Decoder0.IN2
+hex[2] => Decoder0.IN1
+hex[3] => Decoder0.IN0
+seg[0] <= WideOr6.DB_MAX_OUTPUT_PORT_TYPE
+seg[1] <= WideOr5.DB_MAX_OUTPUT_PORT_TYPE
+seg[2] <= WideOr4.DB_MAX_OUTPUT_PORT_TYPE
+seg[3] <= WideOr3.DB_MAX_OUTPUT_PORT_TYPE
+seg[4] <= WideOr2.DB_MAX_OUTPUT_PORT_TYPE
+seg[5] <= WideOr1.DB_MAX_OUTPUT_PORT_TYPE
+seg[6] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|memoria_fpga_top|hex7seg_active_low:u_hex_timer
 hex[0] => Decoder0.IN3
 hex[1] => Decoder0.IN2
 hex[2] => Decoder0.IN1

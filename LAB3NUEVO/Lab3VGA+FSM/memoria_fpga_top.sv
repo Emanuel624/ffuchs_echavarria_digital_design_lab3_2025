@@ -19,10 +19,13 @@ module memoria_fpga_top (
     output logic [3:0]  P1_PAIRS,
     output logic [3:0]  P2_PAIRS,
 
-    // 7 segmentos (activo-en-bajo): HEX0=P1, HEX1=P2
+    // 7 segmentos (activo-en-bajo): HEX0=P1, HEX1=P2, HEX2=contador (F..0)
     output logic [6:0]  HEX0,
-    output logic [6:0]  HEX1
+    output logic [6:0]  HEX1,
+    output logic [6:0]  HEX2
 );
+    logic [7:0] seconds_left_o; // segundos restantes (0..15)
+
     // ---------------- Clocks VGA ----------------
     pll u_pll(.inclk0(clk50), .c0(vgaclk));
 
@@ -62,38 +65,31 @@ module memoria_fpga_top (
     logic [15:0] card_faceup_o, card_removed_o;
     logic        current_player_o;
     logic [3:0]  p1_pairs_o, p2_pairs_o;
-    logic [1:0]  winner_code_o;   // <--- NUEVO: código de ganador (0=none,1=P1,2=P2,3=empate)
+    logic [1:0]  winner_code_o;
 
     memory_game_top_bc #(
-      .TICKS_PER_TURN(300)        // Nota: a 50 MHz, 300 ticks es ~6 µs (ajusta si quieres 15 s reales)
+      .TICKS_PER_TURN(300) // ya no se usa; el timer real es 1 Hz interno
     ) u_game (
       .clk              (clk50),
       .rst_n            (RESET_n),
-
-      // UI
       .start_btn        (start_pulse),
       .click_e          (click_pulse),
       .sel_idx          (SW[3:0]),
-
-      // Estado/observación
       .show_winner_o    (show_winner_o),
       .card_faceup_o    (card_faceup_o),
       .card_removed_o   (card_removed_o),
       .current_player_o (current_player_o),
-
-      // Marcador
       .p1_pairs_o       (p1_pairs_o),
       .p2_pairs_o       (p2_pairs_o),
-
-      // Ganador
-      .winner_code_o    (winner_code_o)   // <--- CONECTADO
+      .winner_code_o    (winner_code_o),
+      .seconds_left_o   (seconds_left_o)
     );
 
     // ---------------- LEDs de turno ----------------
     turn_leds u_leds (
       .clk            (clk50),
       .rst_n          (RESET_n),
-      .game_active    (!show_winner_o),   // encendidos solo durante el juego
+      .game_active    (!show_winner_o),
       .current_player (current_player_o),
       .led_p1         (LED_P1),
       .led_p2         (LED_P2)
@@ -114,6 +110,19 @@ module memoria_fpga_top (
       .seg (HEX1)
     );
 
+    // -------- 7-seg: contador en HEX (F..0) en HEX2 --------
+    // seconds_left_o cuenta 15→0; mostramos nibble bajo (saturado a 0xF)
+    logic [3:0] sec_hex;
+    always_comb begin
+      if (seconds_left_o[7:4] != 4'd0) sec_hex = 4'hF;  // por seguridad si >15
+      else                               sec_hex = seconds_left_o[3:0];
+    end
+
+    hex7seg_active_low u_hex_timer (
+      .hex (sec_hex),
+      .seg (HEX2)
+    );
+
     // ---------------- Video de juego (con indicador de ganador) ----------------
     videoGen_game u_vgen (
         .vgaclk        (vgaclk),
@@ -124,9 +133,10 @@ module memoria_fpga_top (
         .removed_mask  (card_removed_o),
         .sel_idx       (SW[3:0]),
         .show_winner   (show_winner_o),
-        .winner_code   (winner_code_o),   // <--- CONECTADO para la banderola roja/azul/amarilla
+        .winner_code   (winner_code_o),
         .r             (r),
         .g             (g),
         .b             (b)
     );
 endmodule
+

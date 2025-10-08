@@ -24,6 +24,8 @@ module memory_game_fsm_bc (
     // RNG para auto-pick cuando hay timeout
     input  logic [3:0]  rnd_idx,
     input  logic        rnd_valid,
+	 input  logic        can_flip_idx_any, // NUEVO: consulta para rnd_idx
+
 
     // Handshakes con board_core
     input  logic        can_flip_sel,   // válido flip en sel_idx
@@ -172,9 +174,9 @@ module memory_game_fsm_bc (
             end
 
             S_AUTO1: begin
-                enable_random = 1'b1;
-                if (rnd_valid) ns = S_PREP_FLIP1;
-            end
+					enable_random = 1'b1;
+					if (rnd_valid && can_flip_idx_any) ns = S_PREP_FLIP1;
+				end
 
             S_PREP_FLIP1: begin
                 ns = S_DO_FLIP1;
@@ -198,9 +200,9 @@ module memory_game_fsm_bc (
             end
 
             S_AUTO2: begin
-                enable_random = 1'b1;
-                if (rnd_valid && (rnd_idx!=idx_a)) ns = S_PREP_FLIP2;
-            end
+					enable_random = 1'b1;
+					if (rnd_valid && (rnd_idx!=idx_a) && can_flip_idx_any) ns = S_PREP_FLIP2;
+				end
 
             S_PREP_FLIP2: begin
                 ns = S_DO_FLIP2;
