@@ -1,0 +1,240 @@
+`timescale 1ns/1ps
+
+module tb_memory_game_top_bc;
+
+  // ---------------- DUT I/O ----------------
+  logic clk;
+  logic rst_n;
+
+  logic        start_btn;
+  logic        click_e;
+  logic [3:0]  sel_idx;
+
+  logic        show_winner_o;
+  logic [15:0] card_faceup_o, card_removed_o;
+  logic        current_player_o;
+  logic [3:0]  p1_pairs_o, p2_pairs_o;
+  logic [1:0]  winner_code_o;
+  logic [7:0]  seconds_left_o;
+
+  // ---------------- DUT ----------------
+  memory_game_top_bc dut (
+    .clk            (clk),
+    .rst_n          (rst_n),
+    .start_btn      (start_btn),
+    .click_e        (click_e),
+    .sel_idx        (sel_idx),
+    .show_winner_o  (show_winner_o),
+    .card_faceup_o  (card_faceup_o),
+    .card_removed_o (card_removed_o),
+    .current_player_o(current_player_o),
+    .p1_pairs_o     (p1_pairs_o),
+    .p2_pairs_o     (p2_pairs_o),
+    .winner_code_o  (winner_code_o),
+    .seconds_left_o (seconds_left_o)
+  );
+
+  // ---------------- Clock / Reset ----------------
+  initial clk = 1'b0;
+  always #5 clk = ~clk;   // 100 MHz sim (period 10 ns)
+
+  task automatic do_reset();
+    begin
+      rst_n     = 1'b0;
+      start_btn = 1'b0;
+      click_e   = 1'b0;
+      sel_idx   = 4'd0;
+      repeat (5) @(posedge clk);
+      rst_n     = 1'b1;
+      repeat (5) @(posedge clk);
+    end
+  endtask
+
+  // -------------- Helpers --------------
+  // pulso de start (un ciclo)
+  task automatic pulse_start();
+    begin
+      @(posedge clk);
+      start_btn <= 1'b1;
+      @(posedge clk);
+      start_btn <= 1'b0;
+    end
+  endtask
+
+  // Hace click sobre un índice. Espera a que el flip se ejecute (flip_ack).
+  task automatic click_card(input [3:0] idx);
+    int faceup_before, faceup_after;
+    begin
+      faceup_before = $countones(card_faceup_o);
+      sel_idx <= idx;
+      @(posedge clk);
+      click_e <= 1'b1;
+      @(posedge clk);
+      click_e <= 1'b0;
+
+      // esperar a que el flip se concrete (flip_ack pulso)
+      wait_for_flip_ack();
+
+      // sanity: subió la cuenta de faceup
+      faceup_after = $countones(card_faceup_o);
+      assert(faceup_after == faceup_before + 1)
+        else $error("Flip de idx %0d no aumentó faceup (antes=%0d, después=%0d)", idx, faceup_before, faceup_after);
+    end
+  endtask
+
+  // Espera un pulso de flip_ack interno del DUT
+  task automatic wait_for_flip_ack();
+    begin
+      // flip_ack es señal interna en el top; esperamos su pulso 1-ciclo
+      @(posedge clk);
+      while (dut.flip_ack !== 1'b1) @(posedge clk);
+      @(posedge clk); // salir tras el pulso
+    end
+  endtask
+
+  // Espera un pulso de remove_ack y verifica que baje faceup y suba removed
+  task automatic wait_for_remove_pair_effect();
+    int rem_before, rem_after;
+    begin
+      rem_before = $countones(card_removed_o);
+      // Cada carta removida produce un remove_ack; se hacen dos (A y B)
+      @(posedge clk);
+      while (dut.remove_ack !== 1'b1) @(posedge clk);
+      @(posedge clk);
+      rem_after = $countones(card_removed_o);
+      assert(rem_after == rem_before + 1)
+        else $error("remove_ack no incrementó removed (antes=%0d, después=%0d)", rem_before, rem_after);
+    end
+  endtask
+
+  // Espera dos unflip_ack (miss path)
+  task automatic wait_for_unflip_pair_effect();
+    int face_before, face_after;
+    begin
+      face_before = $countones(card_faceup_o);
+      // A
+      @(posedge clk);
+      while (dut.unflip_ack !== 1'b1) @(posedge clk);
+      @(posedge clk);
+      // B
+      @(posedge clk);
+      while (dut.unflip_ack !== 1'b1) @(posedge clk);
+      @(posedge clk);
+      face_after = $countones(card_faceup_o);
+      assert(face_after + 2 == face_before)
+        else $error("Miss: no se observaron ambos unflip (faceup antes=%0d, después=%0d)", face_before, face_after);
+    end
+  endtask
+
+  // Fuerza un timeout de turno (pulso timer_done interno del top)
+  task automatic force_timeout_one_cycle();
+    begin
+      // Forzamos la señal interna 'timer_done' por 1 ciclo de clk
+      force dut.timer_done = 1'b1;
+      @(posedge clk);
+      release dut.timer_done;
+      @(posedge clk);
+    end
+  endtask
+
+  // Ejecuta una pareja correcta (índices emparejados por ROM: i y i+8)
+  task automatic do_match_pair(input [3:0] i);
+    begin
+      click_card(i);
+      click_card(i + 4'd8);
+      // tras CHECK, la FSM hará remove de A y B → 2 acks
+      wait_for_remove_pair_effect();
+      wait_for_remove_pair_effect();
+    end
+  endtask
+
+  // Ejecuta un miss con dos índices que no parean (e.g. 1 y 2)
+  task automatic do_miss(input [3:0] a, input [3:0] b);
+    logic curp;
+    begin
+      curp = current_player_o;
+      click_card(a);
+      click_card(b);
+      wait_for_unflip_pair_effect();
+      // Debe cambiar el jugador
+      assert(current_player_o == ~curp)
+        else $error("Miss no cambió de jugador. curp=%0b ahora=%0b", curp, current_player_o);
+    end
+  endtask
+
+  // ---------------- Test sequence ----------------
+  initial begin
+    $display("[%0t] TB start",$time);
+    do_reset();
+
+    // 1) Arranque de juego
+    pulse_start();
+    // Jugador inicial debe ser P1 (0)
+    assert(current_player_o == 1'b0)
+      else $error("Jugador inicial no es P1 (0). current=%0b", current_player_o);
+
+    // 2) Hacer un match correcto (par 0 y 8) --> P1 anota y mantiene turno
+    do_match_pair(4'd0);
+    assert(p1_pairs_o == 4'd1 && p2_pairs_o == 4'd0)
+      else $error("Score tras primer match inválido. P1=%0d P2=%0d", p1_pairs_o, p2_pairs_o);
+    assert(current_player_o == 1'b0)
+      else $error("Tras match, debería mantenerse P1. current=%0b", current_player_o);
+
+    // 3) Hacer un miss (1 y 2) --> cambia de jugador a P2
+    do_miss(4'd1, 4'd2);
+
+    // 4) Probar AUTO por timeout en PICK1: no clickeamos; forzamos timer_done
+    // Asegurar que haya 0 o 1 faceup antes
+    int face_before, face_after;
+    face_before = $countones(card_faceup_o);
+    // aplicamos un pulso de timeout; la FSM debe pasar a AUTO1 y flippear algo válido
+    force_timeout_one_cycle();
+    // Esperar a que ocurra un flip (flip_ack) sin click
+    wait_for_flip_ack();
+    face_after = $countones(card_faceup_o);
+    assert(face_after == face_before + 1)
+      else $error("AUTO1 no flippeó carta. face_before=%0d face_after=%0d", face_before, face_after);
+
+    // 5) Terminar el juego haciendo todas las parejas restantes para disparar show_winner
+    // Nota: ya hicimos la pareja (0,8) arriba; recorrer las restantes 1..7
+    // Vuelve a ser turno de P1 si en 3) se cambió a P2; facilitamos haciendo 7 pares seguidos para P1
+    // Para simplificar, forzamos un nuevo start de turno con clicks rápidos.
+    // Asegurémonos de no elegir cartas ya removidas:
+    foreach (card_removed_o[i]) begin
+      // nada: sólo para sincronizar el foreach
+    end
+
+    // Haremos pares (3,11), (4,12), (5,13), (6,14), (7,15) y también (1,9) que no usamos en miss
+    do_match_pair(4'd3);
+    do_match_pair(4'd4);
+    do_match_pair(4'd5);
+    do_match_pair(4'd6);
+    do_match_pair(4'd7);
+    // Asegura no repetir las usadas en miss (1 y 2): 2 aún está sin pareja; 1 fue usada en miss pero está oculta; podemos parearlas ahora:
+    do_match_pair(4'd1);
+    do_match_pair(4'd2);
+
+    // 6) Fin de juego
+    // all_pairs_done -> show_winner_o debe estar en 1; winner_code_o depende de marcador
+    @(posedge clk);
+    assert(show_winner_o == 1'b1)
+      else $error("show_winner_o no se activó al remover todas las cartas.");
+    // Por la secuencia, P1 debería haber acumulado más puntos que P2
+    $display("Puntajes finales: P1=%0d P2=%0d winner_code=%0d", p1_pairs_o, p2_pairs_o, winner_code_o);
+    assert((p1_pairs_o > p2_pairs_o) && (winner_code_o == 2'd1))
+      else $error("Winner code inconsistente. P1=%0d P2=%0d code=%0d", p1_pairs_o, p2_pairs_o, winner_code_o);
+
+    $display("[%0t] TB PASSED ✅",$time);
+    $finish;
+  end
+
+  // ---------------- Wave dump opcional ----------------
+  initial begin
+`ifdef FSDB
+    $fsdbDumpfile("tb.fsdb"); $fsdbDumpvars(0,tb_memory_game_top_bc);
+`elsif VCD
+    $dumpfile("tb.vcd"); $dumpvars(0,tb_memory_game_top_bc);
+`endif
+  end
+
+endmodule

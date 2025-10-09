@@ -1,12 +1,12 @@
-Fitter Status : Successful - Tue Oct 07 22:53:41 2025
+Fitter Status : Successful - Thu Oct 09 17:28:32 2025
 Quartus Prime Version : 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 Revision Name : VGAFSM
 Top-level Entity Name : memoria_fpga_top
 Family : Cyclone V
 Device : 5CSXFC6D6F31C6
 Timing Models : Final
-Logic utilization (in ALMs) : 1,023 / 41,910 ( 2 % )
-Total registers : 330
+Logic utilization (in ALMs) : 1,046 / 41,910 ( 2 % )
+Total registers : 300
 Total pins : 68 / 499 ( 14 % )
 Total virtual pins : 0
 Total block memory bits : 0 / 5,662,720 ( 0 % )

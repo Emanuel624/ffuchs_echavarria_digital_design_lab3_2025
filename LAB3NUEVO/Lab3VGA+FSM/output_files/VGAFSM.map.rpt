@@ -1,5 +1,5 @@
 Analysis & Synthesis report for VGAFSM
-Tue Oct 07 22:50:26 2025
+Thu Oct 09 17:25:17 2025
 Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 
 
@@ -60,7 +60,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Tue Oct 07 22:50:26 2025       ;
+; Analysis & Synthesis Status     ; Successful - Thu Oct 09 17:25:17 2025       ;
 ; Quartus Prime Version           ; 20.1.0 Build 711 06/05/2020 SJ Lite Edition ;
 ; Revision Name                   ; VGAFSM                                      ;
 ; Top-level Entity Name           ; memoria_fpga_top                            ;
@@ -182,7 +182,10 @@ https://fpgasoftware.intel.com/eula.
 ;     Processor 1            ; 100.0%      ;
 ;     Processor 2            ;   0.0%      ;
 ;     Processor 3            ;   0.0%      ;
-;     Processors 4-12        ;   0.0%      ;
+;     Processor 4            ;   0.0%      ;
+;     Processor 5            ;   0.0%      ;
+;     Processor 6            ;   0.0%      ;
+;     Processors 7-12        ;   0.0%      ;
 +----------------------------+-------------+
 
 
@@ -225,14 +228,14 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-------------+
 ; Resource                                    ; Usage       ;
 +---------------------------------------------+-------------+
-; Estimate of Logic utilization (ALMs needed) ; 1028        ;
+; Estimate of Logic utilization (ALMs needed) ; 1062        ;
 ;                                             ;             ;
-; Combinational ALUT usage for logic          ; 1830        ;
+; Combinational ALUT usage for logic          ; 1881        ;
 ;     -- 7 input functions                    ; 7           ;
-;     -- 6 input functions                    ; 205         ;
-;     -- 5 input functions                    ; 151         ;
-;     -- 4 input functions                    ; 336         ;
-;     -- <=3 input functions                  ; 1131        ;
+;     -- 6 input functions                    ; 234         ;
+;     -- 5 input functions                    ; 152         ;
+;     -- 4 input functions                    ; 341         ;
+;     -- <=3 input functions                  ; 1147        ;
 ;                                             ;             ;
 ; Dedicated logic registers                   ; 264         ;
 ;                                             ;             ;
@@ -242,8 +245,8 @@ https://fpgasoftware.intel.com/eula.
 ;                                             ;             ;
 ; Maximum fan-out node                        ; clk50~input ;
 ; Maximum fan-out                             ; 196         ;
-; Total fan-out                               ; 7326        ;
-; Average fan-out                             ; 3.27        ;
+; Total fan-out                               ; 7526        ;
+; Average fan-out                             ; 3.29        ;
 +---------------------------------------------+-------------+
 
 
@@ -252,21 +255,21 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------+--------------+
 ; Compilation Hierarchy Node                  ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                      ; Entity Name        ; Library Name ;
 +---------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------+--------------+
-; |memoria_fpga_top                           ; 1830 (5)            ; 264 (0)                   ; 0                 ; 8          ; 68   ; 0            ; |memoria_fpga_top                                                                                                                                        ; memoria_fpga_top   ; work         ;
+; |memoria_fpga_top                           ; 1881 (5)            ; 264 (0)                   ; 0                 ; 8          ; 68   ; 0            ; |memoria_fpga_top                                                                                                                                        ; memoria_fpga_top   ; work         ;
 ;    |btn_debouncer:u_db_click|               ; 24 (24)             ; 22 (22)                   ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|btn_debouncer:u_db_click                                                                                                               ; btn_debouncer      ; work         ;
 ;    |btn_debouncer:u_db_start|               ; 25 (25)             ; 22 (22)                   ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|btn_debouncer:u_db_start                                                                                                               ; btn_debouncer      ; work         ;
 ;    |hex7seg_active_low:u_hex_p1|            ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|hex7seg_active_low:u_hex_p1                                                                                                            ; hex7seg_active_low ; work         ;
 ;    |hex7seg_active_low:u_hex_p2|            ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|hex7seg_active_low:u_hex_p2                                                                                                            ; hex7seg_active_low ; work         ;
 ;    |hex7seg_active_low:u_hex_timer|         ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|hex7seg_active_low:u_hex_timer                                                                                                         ; hex7seg_active_low ; work         ;
-;    |memory_game_top_bc:u_game|              ; 503 (59)            ; 125 (41)                  ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|memory_game_top_bc:u_game                                                                                                              ; memory_game_top_bc ; work         ;
-;       |board_core:u_board|                  ; 356 (356)           ; 35 (35)                   ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|memory_game_top_bc:u_game|board_core:u_board                                                                                           ; board_core         ; work         ;
+;    |memory_game_top_bc:u_game|              ; 499 (57)            ; 125 (41)                  ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|memory_game_top_bc:u_game                                                                                                              ; memory_game_top_bc ; work         ;
+;       |board_core:u_board|                  ; 354 (354)           ; 35 (35)                   ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|memory_game_top_bc:u_game|board_core:u_board                                                                                           ; board_core         ; work         ;
 ;       |memory_game_fsm_bc:u_fsm|            ; 73 (73)             ; 38 (38)                   ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm                                                                                     ; memory_game_fsm_bc ; work         ;
 ;       |pair_check_rom:u_pair|               ; 3 (3)               ; 3 (3)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|memory_game_top_bc:u_game|pair_check_rom:u_pair                                                                                        ; pair_check_rom     ; work         ;
 ;       |scoreboard_pairs:u_score|            ; 12 (12)             ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|memory_game_top_bc:u_game|scoreboard_pairs:u_score                                                                                     ; scoreboard_pairs   ; work         ;
 ;    |pll:u_pll|                              ; 1 (1)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|pll:u_pll                                                                                                                              ; pll                ; work         ;
 ;    |turn_leds:u_leds|                       ; 28 (28)             ; 26 (26)                   ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|turn_leds:u_leds                                                                                                                       ; turn_leds          ; work         ;
 ;    |vgaController:u_vgac|                   ; 32 (32)             ; 20 (20)                   ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|vgaController:u_vgac                                                                                                                   ; vgaController      ; work         ;
-;    |videoGen_game:u_vgen|                   ; 1191 (22)           ; 48 (24)                   ; 0                 ; 8          ; 0    ; 0            ; |memoria_fpga_top|videoGen_game:u_vgen                                                                                                                   ; videoGen_game      ; work         ;
+;    |videoGen_game:u_vgen|                   ; 1246 (77)           ; 48 (24)                   ; 0                 ; 8          ; 0    ; 0            ; |memoria_fpga_top|videoGen_game:u_vgen                                                                                                                   ; videoGen_game      ; work         ;
 ;       |cardGrid_game:u_grid|                ; 1169 (742)          ; 24 (24)                   ; 0                 ; 8          ; 0    ; 0            ; |memoria_fpga_top|videoGen_game:u_vgen|cardGrid_game:u_grid                                                                                              ; cardGrid_game      ; work         ;
 ;          |lpm_divide:Div0|                  ; 224 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|videoGen_game:u_vgen|cardGrid_game:u_grid|lpm_divide:Div0                                                                              ; lpm_divide         ; work         ;
 ;             |lpm_divide_fpo:auto_generated| ; 224 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|videoGen_game:u_vgen|cardGrid_game:u_grid|lpm_divide:Div0|lpm_divide_fpo:auto_generated                                                ; lpm_divide_fpo     ; work         ;
@@ -352,8 +355,8 @@ Encoding Type:  One-Hot
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
 ; Total registers                              ; 264   ;
-; Number of registers using Synchronous Clear  ; 115   ;
-; Number of registers using Synchronous Load   ; 26    ;
+; Number of registers using Synchronous Clear  ; 122   ;
+; Number of registers using Synchronous Load   ; 9     ;
 ; Number of registers using Asynchronous Clear ; 195   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 34    ;
@@ -383,29 +386,27 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                         ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------+
-; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |memoria_fpga_top|videoGen_game:u_vgen|b[0]                                        ;
-; 3:1                ; 17 bits   ; 34 LEs        ; 0 LEs                ; 34 LEs                 ; Yes        ; |memoria_fpga_top|videoGen_game:u_vgen|b[2]                                        ;
+; 3:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |memoria_fpga_top|videoGen_game:u_vgen|r[2]                                        ;
 ; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |memoria_fpga_top|memory_game_top_bc:u_game|scoreboard_pairs:u_score|p1_pairs[1]   ;
 ; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |memoria_fpga_top|memory_game_top_bc:u_game|scoreboard_pairs:u_score|p2_pairs[0]   ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |memoria_fpga_top|memory_game_top_bc:u_game|seconds_q[0]                           ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |memoria_fpga_top|memory_game_top_bc:u_game|seconds_q[7]                           ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 0 LEs                ; 36 LEs                 ; Yes        ; |memoria_fpga_top|btn_debouncer:u_db_start|cnt_q[6]                                ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 0 LEs                ; 36 LEs                 ; Yes        ; |memoria_fpga_top|btn_debouncer:u_db_click|cnt_q[12]                               ;
-; 3:1                ; 26 bits   ; 52 LEs        ; 0 LEs                ; 52 LEs                 ; Yes        ; |memoria_fpga_top|memory_game_top_bc:u_game|ps_cnt_q[13]                           ;
-; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |memoria_fpga_top|videoGen_game:u_vgen|b[4]                                        ;
-; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |memoria_fpga_top|memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|idx_target[1] ;
-; 9:1                ; 6 bits    ; 36 LEs        ; 36 LEs               ; 0 LEs                  ; Yes        ; |memoria_fpga_top|videoGen_game:u_vgen|cardGrid_game:u_grid|b[1]                   ;
-; 16:1               ; 15 bits   ; 150 LEs       ; 150 LEs              ; 0 LEs                  ; Yes        ; |memoria_fpga_top|videoGen_game:u_vgen|cardGrid_game:u_grid|b[3]                   ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |memoria_fpga_top|memory_game_top_bc:u_game|seconds_q[3]                           ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |memoria_fpga_top|memory_game_top_bc:u_game|seconds_q[4]                           ;
+; 3:1                ; 18 bits   ; 36 LEs        ; 0 LEs                ; 36 LEs                 ; Yes        ; |memoria_fpga_top|btn_debouncer:u_db_start|cnt_q[10]                               ;
+; 3:1                ; 18 bits   ; 36 LEs        ; 0 LEs                ; 36 LEs                 ; Yes        ; |memoria_fpga_top|btn_debouncer:u_db_click|cnt_q[17]                               ;
+; 3:1                ; 26 bits   ; 52 LEs        ; 0 LEs                ; 52 LEs                 ; Yes        ; |memoria_fpga_top|memory_game_top_bc:u_game|ps_cnt_q[25]                           ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |memoria_fpga_top|memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|idx_target[0] ;
+; 9:1                ; 6 bits    ; 36 LEs        ; 36 LEs               ; 0 LEs                  ; Yes        ; |memoria_fpga_top|videoGen_game:u_vgen|cardGrid_game:u_grid|r[6]                   ;
+; 16:1               ; 15 bits   ; 150 LEs       ; 150 LEs              ; 0 LEs                  ; Yes        ; |memoria_fpga_top|videoGen_game:u_vgen|cardGrid_game:u_grid|g[2]                   ;
 ; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|board_core:u_board|state_q             ;
-; 16:1               ; 2 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|board_core:u_board|Mux1                ;
+; 16:1               ; 2 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|board_core:u_board|Mux0                ;
 ; 16:1               ; 2 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|board_core:u_board|Mux2                ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|Selector26    ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|Selector25    ;
 ; 16:1               ; 2 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|board_core:u_board|Mux5                ;
-; 17:1               ; 2 bits    ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; No         ; |memoria_fpga_top|videoGen_game:u_vgen|cardGrid_game:u_grid|is_face                ;
-; 17:1               ; 3 bits    ; 33 LEs        ; 15 LEs               ; 18 LEs                 ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|Selector10    ;
+; 17:1               ; 2 bits    ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; No         ; |memoria_fpga_top|videoGen_game:u_vgen|cardGrid_game:u_grid|is_removed             ;
+; 17:1               ; 3 bits    ; 33 LEs        ; 15 LEs               ; 18 LEs                 ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|Selector5     ;
 ; 19:1               ; 2 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|Selector9     ;
 ; 19:1               ; 2 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|Selector16    ;
-; 19:1               ; 2 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|Selector21    ;
+; 19:1               ; 2 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|Selector23    ;
 ; 19:1               ; 2 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|Selector14    ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------+
 
@@ -573,26 +574,25 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     ENA CLR           ; 16                          ;
 ;     ENA CLR SLD       ; 8                           ;
 ;     ENA SCLR          ; 10                          ;
-;     SCLR              ; 25                          ;
-;     SCLR SLD          ; 17                          ;
-;     plain             ; 17                          ;
-; arriav_lcell_comb     ; 1834                        ;
-;     arith             ; 885                         ;
-;         0 data inputs ; 54                          ;
-;         1 data inputs ; 468                         ;
+;     SCLR              ; 49                          ;
+;     plain             ; 10                          ;
+; arriav_lcell_comb     ; 1885                        ;
+;     arith             ; 904                         ;
+;         0 data inputs ; 56                          ;
+;         1 data inputs ; 485                         ;
 ;         2 data inputs ; 121                         ;
 ;         3 data inputs ; 71                          ;
 ;         4 data inputs ; 171                         ;
 ;     extend            ; 7                           ;
 ;         7 data inputs ; 7                           ;
-;     normal            ; 877                         ;
+;     normal            ; 909                         ;
 ;         0 data inputs ; 1                           ;
 ;         1 data inputs ; 11                          ;
-;         2 data inputs ; 192                         ;
+;         2 data inputs ; 189                         ;
 ;         3 data inputs ; 152                         ;
-;         4 data inputs ; 165                         ;
-;         5 data inputs ; 151                         ;
-;         6 data inputs ; 205                         ;
+;         4 data inputs ; 170                         ;
+;         5 data inputs ; 152                         ;
+;         6 data inputs ; 234                         ;
 ;     shared            ; 65                          ;
 ;         0 data inputs ; 13                          ;
 ;         1 data inputs ; 6                           ;
@@ -602,7 +602,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; boundary_port         ; 68                          ;
 ;                       ;                             ;
 ; Max LUT depth         ; 28.70                       ;
-; Average LUT depth     ; 14.25                       ;
+; Average LUT depth     ; 14.09                       ;
 +-----------------------+-----------------------------+
 
 
@@ -611,7 +611,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:02     ;
+; Top            ; 00:00:06     ;
 +----------------+--------------+
 
 
@@ -621,7 +621,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
-    Info: Processing started: Tue Oct 07 22:50:17 2025
+    Info: Processing started: Thu Oct 09 17:25:01 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off VGAFSM -c VGAFSM
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 12 of the 12 processors detected
@@ -638,7 +638,7 @@ Info (12021): Found 1 design units, including 1 entities, in source file memory_
 Info (12021): Found 1 design units, including 1 entities, in source file vgacontroller.sv
     Info (12023): Found entity 1: vgaController File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/vgaController.sv Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file videogen.sv
-    Info (12023): Found entity 1: videoGen_game File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/videoGen.sv Line: 6
+    Info (12023): Found entity 1: videoGen_game File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/videoGen.sv Line: 7
 Info (12021): Found 1 design units, including 1 entities, in source file vga.sv
     Info (12023): Found entity 1: vga File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/vga.sv Line: 1
 Info (12021): Found 2 design units, including 2 entities, in source file rectgen.sv
@@ -658,6 +658,8 @@ Info (12021): Found 1 design units, including 1 entities, in source file scorebo
     Info (12023): Found entity 1: scoreboard_pairs File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/scoreboard_pairs.sv Line: 8
 Info (12021): Found 1 design units, including 1 entities, in source file hex7seg_decoder.sv
     Info (12023): Found entity 1: hex7seg_active_low File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/hex7seg_decoder.sv Line: 5
+Info (12021): Found 1 design units, including 1 entities, in source file tb_memory_game_top_bc.sv
+    Info (12023): Found entity 1: tb_memory_game_top_bc File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/tb_memory_game_top_bc.sv Line: 12
 Info (12127): Elaborating entity "memoria_fpga_top" for the top level hierarchy
 Info (12128): Elaborating entity "pll" for hierarchy "pll:u_pll" File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memoria_fpga_top.sv Line: 30
 Info (12128): Elaborating entity "vgaController" for hierarchy "vgaController:u_vgac" File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memoria_fpga_top.sv Line: 41
@@ -672,7 +674,8 @@ Info (12128): Elaborating entity "scoreboard_pairs" for hierarchy "memory_game_t
 Info (12128): Elaborating entity "turn_leds" for hierarchy "turn_leds:u_leds" File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memoria_fpga_top.sv Line: 96
 Info (12128): Elaborating entity "hex7seg_active_low" for hierarchy "hex7seg_active_low:u_hex_p1" File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memoria_fpga_top.sv Line: 106
 Info (12128): Elaborating entity "videoGen_game" for hierarchy "videoGen_game:u_vgen" File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memoria_fpga_top.sv Line: 140
-Info (12128): Elaborating entity "cardGrid_game" for hierarchy "videoGen_game:u_vgen|cardGrid_game:u_grid" File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/videoGen.sv Line: 32
+Info (10264): Verilog HDL Case Statement information at videoGen.sv(120): all case item expressions in this case statement are onehot File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/videoGen.sv Line: 120
+Info (12128): Elaborating entity "cardGrid_game" for hierarchy "videoGen_game:u_vgen|cardGrid_game:u_grid" File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/videoGen.sv Line: 34
 Warning (10230): Verilog HDL assignment warning at cardGrid_game.sv(65): truncated value with size 32 to match size of target (4) File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/cardGrid_game.sv Line: 65
 Warning (10230): Verilog HDL assignment warning at cardGrid_game.sv(94): truncated value with size 32 to match size of target (4) File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/cardGrid_game.sv Line: 94
 Info (278001): Inferred 2 megafunctions from design logic
@@ -715,16 +718,16 @@ Info (17049): 6 registers lost all their fanouts during netlist optimizations.
 Info (144001): Generated suppressed messages file C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/output_files/VGAFSM.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 1946 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 1980 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 8 input pins
     Info (21059): Implemented 60 output pins
-    Info (21061): Implemented 1870 logic cells
+    Info (21061): Implemented 1904 logic cells
     Info (21062): Implemented 8 DSP elements
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 4 warnings
-    Info: Peak virtual memory: 4937 megabytes
-    Info: Processing ended: Tue Oct 07 22:50:26 2025
-    Info: Elapsed time: 00:00:09
-    Info: Total CPU time (on all processors): 00:00:17
+    Info: Peak virtual memory: 4934 megabytes
+    Info: Processing ended: Thu Oct 09 17:25:17 2025
+    Info: Elapsed time: 00:00:16
+    Info: Total CPU time (on all processors): 00:00:30
 
 
 +------------------------------------------+

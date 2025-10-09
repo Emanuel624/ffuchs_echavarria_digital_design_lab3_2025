@@ -1,0 +1,100 @@
+# Reading pref.tcl
+# do VGAFSM_run_msim_rtl_verilog.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 2020.1 Lib Mapping Utility 2020.02 Feb 28 2020
+# vmap work rtl_work 
+# Copying C:/intelFPGA_lite/20.1/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vlog -sv -work work +incdir+C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM {C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memory_game_fsm_bc.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 17:22:07 on Oct 09,2025
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM" C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memory_game_fsm_bc.sv 
+# -- Compiling module memory_game_fsm_bc
+# 
+# Top level modules:
+# 	memory_game_fsm_bc
+# End time: 17:22:08 on Oct 09,2025, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM {C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/board_core.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 17:22:08 on Oct 09,2025
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM" C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/board_core.sv 
+# -- Compiling module board_core
+# 
+# Top level modules:
+# 	board_core
+# End time: 17:22:08 on Oct 09,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM {C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/pair_check_rom.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 17:22:08 on Oct 09,2025
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM" C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/pair_check_rom.sv 
+# -- Compiling module pair_check_rom
+# 
+# Top level modules:
+# 	pair_check_rom
+# End time: 17:22:08 on Oct 09,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM {C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memory_game_top_bc.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 17:22:08 on Oct 09,2025
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM" C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memory_game_top_bc.sv 
+# -- Compiling module memory_game_top_bc
+# 
+# Top level modules:
+# 	memory_game_top_bc
+# End time: 17:22:08 on Oct 09,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM {C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/scoreboard_pairs.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 17:22:08 on Oct 09,2025
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM" C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/scoreboard_pairs.sv 
+# -- Compiling module scoreboard_pairs
+# 
+# Top level modules:
+# 	scoreboard_pairs
+# End time: 17:22:08 on Oct 09,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vlog -sv -work work +incdir+C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM {C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/tb_memory_game_top_bc.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 17:22:08 on Oct 09,2025
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM" C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/tb_memory_game_top_bc.sv 
+# -- Compiling module tb_memory_game_top_bc
+# 
+# Top level modules:
+# 	tb_memory_game_top_bc
+# End time: 17:22:08 on Oct 09,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L rtl_work -L work -voptargs="+acc"  tb_memory_game_top_bc
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L rtl_work -L work -voptargs=""+acc"" tb_memory_game_top_bc 
+# Start time: 17:22:08 on Oct 09,2025
+# Loading sv_std.std
+# Loading work.tb_memory_game_top_bc
+# Loading work.memory_game_top_bc
+# Loading work.board_core
+# Loading work.pair_check_rom
+# Loading work.memory_game_fsm_bc
+# Loading work.scoreboard_pairs
+# 
+# add wave *
+# view structure
+# .main_pane.structure.interior.cs.body.struct
+# view signals
+# .main_pane.objects.interior.cs.body.tree
+# run -all
+# [0] TB start
+# ** Fatal: Timeout esperando REMOVED de la pareja (3,11)
+#    Time: 400910 ns  Scope: tb_memory_game_top_bc.wait_removed_pair File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/tb_memory_game_top_bc.sv Line: 126
+# ** Note: $finish    : C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/tb_memory_game_top_bc.sv(126)
+#    Time: 400910 ns  Iteration: 1  Instance: /tb_memory_game_top_bc
+# 1
+# Break in Task wait_removed_pair at C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/tb_memory_game_top_bc.sv line 126
+# End time: 17:24:05 on Oct 09,2025, Elapsed time: 0:01:57
+# Errors: 1, Warnings: 0

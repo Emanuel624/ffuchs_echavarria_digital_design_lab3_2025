@@ -1,0 +1,167 @@
+m255
+K4
+z2
+!s11f vlog 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/simulation/modelsim
+vboard_core
+Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
+Z2 !s110 1760052128
+!i10b 1
+!s100 e8BN[FKeh2cNUM59OM[k@0
+Z3 !s11b Dg1SIo80bB@j0V0VzS_@n1
+I?ZGREH?L@I@dORXzdd?Ek3
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+S1
+R0
+w1759898026
+8C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/board_core.sv
+FC:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/board_core.sv
+!i122 1
+L0 7 118
+Z5 OV;L;2020.1;71
+r1
+!s85 0
+31
+Z6 !s108 1760052128.000000
+!s107 C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/board_core.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM|C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/board_core.sv|
+!i113 1
+Z7 o-sv -work work
+Z8 !s92 -sv -work work +incdir+C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM
+Z9 tCvgOpt 0
+vmemory_game_fsm_bc
+R1
+R2
+!i10b 1
+!s100 `3[3jMhC;jlm1_C90DhN70
+R3
+IWASc242J1HE3VSBz_d>8H2
+R4
+S1
+R0
+w1759897910
+8C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memory_game_fsm_bc.sv
+FC:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memory_game_fsm_bc.sv
+!i122 0
+L0 9 321
+R5
+r1
+!s85 0
+31
+!s108 1760052127.000000
+!s107 C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memory_game_fsm_bc.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM|C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memory_game_fsm_bc.sv|
+!i113 1
+R7
+R8
+R9
+vmemory_game_top_bc
+R1
+R2
+!i10b 1
+!s100 7@=@L5fQVb]Fo]`ZBQg271
+R3
+Ik?VBkd80HA[^;A]B6hK3:0
+R4
+S1
+R0
+w1759898988
+8C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memory_game_top_bc.sv
+FC:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memory_game_top_bc.sv
+!i122 3
+L0 1 245
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memory_game_top_bc.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM|C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memory_game_top_bc.sv|
+!i113 1
+R7
+R8
+R9
+vpair_check_rom
+R1
+R2
+!i10b 1
+!s100 _URZ6K7nDPnmi1WW827F83
+R3
+I6N9Q3Cmm6cP5nV^m]Ek;V3
+R4
+S1
+R0
+w1759794977
+8C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/pair_check_rom.sv
+FC:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/pair_check_rom.sv
+!i122 2
+L0 6 32
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/pair_check_rom.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM|C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/pair_check_rom.sv|
+!i113 1
+R7
+R8
+R9
+vscoreboard_pairs
+R1
+R2
+!i10b 1
+!s100 a<<L_2;>1K=[kiXD^6jKf3
+R3
+Ia3zVfEEFOY`oIV6VL@gQ51
+R4
+S1
+R0
+w1759803424
+8C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/scoreboard_pairs.sv
+FC:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/scoreboard_pairs.sv
+!i122 4
+L0 8 41
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/scoreboard_pairs.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM|C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/scoreboard_pairs.sv|
+!i113 1
+R7
+R8
+R9
+vtb_memory_game_top_bc
+R1
+R2
+!i10b 1
+!s100 B9m3YeG]7BRRBeeM`^28h3
+R3
+ICi<?AMDHK8lKCd:NBk]Ql2
+R4
+S1
+R0
+w1760052108
+8C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/tb_memory_game_top_bc.sv
+FC:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/tb_memory_game_top_bc.sv
+!i122 5
+L0 12 243
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/tb_memory_game_top_bc.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM|C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/tb_memory_game_top_bc.sv|
+!i113 1
+R7
+R8
+R9
