@@ -1,17 +1,15 @@
 //==============================================================
-// FSM de Memoria (2 jugadores) compatible con board_core
-// - Handshakes: req_flip / req_unflip / req_remove_pair + *_ack
-// - Pipelín de flip: PREP->DO->WAIT (evita carreras)
-// - Usa pair_check por pulso: pair_start / pair_done / pair_match
-// - Retiene turno si hay match; cambia si no hay match
-// - all_pairs_done => SHOW_WINNER
+// FSM de Memoria (2 jugadores)
+// - Handshakes con el board core
+// - Chequeo de parejas en cada turno
+// - Retiene turno si hay match
 //==============================================================
 module memory_game_fsm_bc (
     input  logic        clk,
     input  logic        reset,
 
     // UI
-    input  logic        start_game,     // pulso/level
+    input  logic        start_game,     // pulso
     input  logic        select_e,       // pulso de click
     input  logic [3:0]  sel_idx,        // índice del cursor
 
@@ -22,31 +20,31 @@ module memory_game_fsm_bc (
     input  logic        all_pairs_done,
 
     // RNG para auto-pick cuando hay timeout
-    input  logic [3:0]  rnd_idx,
-    input  logic        rnd_valid,
-	 input  logic        can_flip_idx_any, // NUEVO: consulta para rnd_idx
+    input  logic [3:0]  rnd_idx,				// índice propuesto por RNG
+    input  logic        rnd_valid,			// Valido?
+	 input  logic        can_flip_idx_any, // se puede voltear?
 
 
     // Handshakes con board_core
-    input  logic        can_flip_sel,   // válido flip en sel_idx
-    input  logic        flip_ack,
-    input  logic        unflip_ack,
-    input  logic        remove_ack,
+    input  logic        can_flip_sel,   // válido flip?
+    input  logic        flip_ack,		// confirma el flip
+    input  logic        unflip_ack,		// confirma el unflip
+    input  logic        remove_ack,		// confirma remove
 
-    output logic        req_flip,
-    output logic        req_unflip,
-    output logic        req_remove_pair,
+    output logic        req_flip,		// pedir flip
+    output logic        req_unflip,		// pedir unflip
+    output logic        req_remove_pair, //elimina
     output logic [3:0]  act_idx,
 
-    // Pair-checker (módulo aparte)
-    output logic        pair_start,     // pulso 1 ciclo
-    input  logic        pair_done,      // pulso 1 ciclo
+    // Pair-checker
+    output logic        pair_start,     
+    input  logic        pair_done,      
     input  logic        pair_match,     // válido con pair_done
 
     output logic [3:0]  idx_a_out,      // picks confirmados
     output logic [3:0]  idx_b_out,
 
-    // Control a timer (opcional, útil en top)
+    // Control timer
     output logic        turn_load_15,
     output logic        turn_start,
     output logic        turn_pause,
@@ -56,9 +54,9 @@ module memory_game_fsm_bc (
     output logic        game_active,
     output logic        current_player, // 0=P1, 1=P2
     output logic        enable_random,  // habilita RNG en AUTO
-    output logic        validate_cards, // pulso/level cuando estamos chequeando
-    output logic        update_score,   // pulso cuando hay match
-    output logic        show_winner,
+    output logic        validate_cards, // se comparan las cartas
+    output logic        update_score,   // subir puntaje
+    output logic        show_winner,	// Se gano
 
     // Debug
     output logic [5:0]  state
@@ -117,11 +115,10 @@ module memory_game_fsm_bc (
     assign validate_cards = (s == S_CHECK);
     assign show_winner    = (s == S_GAMEOVER);
 
-    // Timer: cargar/arrancar al inicio del turno, pausar durante animaciones
-    // (ajusta a tu timer real)
+    // Timer: cargar/arrancar al inicio del turno, pausa durante animaciones
     // - load/start en S_NEW_TURN
     // - pause en flips/unflips/removes/check
-    // - reset opcional (no se usa aquí)
+    // - reset 
     always_comb begin
         turn_load_15 = (s == S_NEW_TURN);
         turn_start   = (s == S_NEW_TURN);
@@ -222,7 +219,7 @@ module memory_game_fsm_bc (
             // -------------- CHECK ---------------------
             S_CHECK: begin
                 pair_start = 1'b1;   // pulso 1 ciclo
-                // se queda 1 ciclo y evalúa en secuencial con pair_done
+                // se queda 1 ciclo y evalúa en secuencial
                 ns = S_CHECK;
                 if (pair_done) begin
                     if (pair_match) ns = S_MATCH_REM_A;
@@ -272,21 +269,21 @@ module memory_game_fsm_bc (
                 if (unflip_ack) ns = S_NEXT_PLAYER;
             end
             S_NEXT_PLAYER: begin
-                ns = S_NEW_TURN; // toggle en secuencial
+                ns = S_NEW_TURN; 
             end
 
             // -------------- GAME OVER -----------------
             S_GAMEOVER: begin
                 // se queda aquí hasta reset
                 ns = S_GAMEOVER;
-                if (start_game) ns = S_IDLE; // opcional: reinicio por start
+                if (start_game) ns = S_IDLE; 
             end
 
             default: ns = S_IDLE;
         endcase
     end
 
-    // Secuencial: estado + registros de picks y control
+    // Secuencial: estado + registro de picks y control
     always_ff @(posedge clk or posedge reset) begin
         if (reset) begin
             s          <= S_IDLE;
@@ -298,7 +295,7 @@ module memory_game_fsm_bc (
         end else begin
             s <= ns;
 
-            // Latch del índice a flippear en PREP (según origen: AUTO o CLICK)
+            // Latch del índice a flippear en 
             if (ns == S_PREP_FLIP1) begin
                 idx_target <= (s==S_AUTO1) ? rnd_idx : sel_idx;
             end
@@ -306,7 +303,7 @@ module memory_game_fsm_bc (
                 idx_target <= (s==S_AUTO2) ? rnd_idx : sel_idx;
             end
 
-            // Confirmación de flips (cuando llega flip_ack en WAIT)
+            // Confirmación de flips
             if (s == S_WAIT_FLIP1 && flip_ack) begin
                 idx_a <= idx_target;
             end
