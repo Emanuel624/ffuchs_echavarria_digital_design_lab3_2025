@@ -2,10 +2,9 @@
 // tb_memory_game_top_bc.sv  (autochequeo)
 // - Reloj 50 MHz
 // - Reset, start
-// - Prueba de MATCH: (i, i+8) -> REMOVED (+2 en el conteo)
-// - Prueba de MISS: (1,2) -> se desvoltean y cambia jugador
-// - Prueba de AUTO-PICK: se fuerza timer_done por 1 ciclo (x2)
-//   y se verifica que el tablero reaccionó (flip/remove)
+// - Prueba de MATCH
+// - Prueba de MISS
+// - Prueba de AUTO-PICK
 // ============================================================
 `timescale 1ns/1ps
 
@@ -51,7 +50,7 @@ module tb_memory_game_top_bc;
   initial clk = 1'b0;
   always #(T_CLK_NS/2.0) clk = ~clk;
 
-  // ---------------- Utils ----------------
+  // ---------------- Utilidades ----------------
   function automatic int popcount16(input logic [15:0] v);
     int c;
     for (int j=0;j<16;j++) if (v[j]) c++;
@@ -66,20 +65,20 @@ module tb_memory_game_top_bc;
     return popcount16(card_removed_o);
   endfunction
 
-  // ---------------- Tasks auxiliares ----------------
+  // ---------------- auxiliares ----------------
 
-  // Pulso de "start" 1 ciclo
+  // Pulso de "start" 
   task automatic pulse_start();
     begin
       start_btn <= 1'b1;
       @(posedge clk);
       start_btn <= 1'b0;
-      // deja correr NEW_TURN -> PICK1
+      // deja correr NEW_TURN a PICK1
       repeat (6) @(posedge clk);
     end
   endtask
 
-  // Click en índice actual (1 ciclo), con margen de pipeline
+  // Click en índice actual (1 ciclo)
   task automatic click_once(input [3:0] idx);
     begin
       sel_idx <= idx;
@@ -92,7 +91,7 @@ module tb_memory_game_top_bc;
     end
   endtask
 
-  // Espera hasta que una carta quede faceup o removed (lo que ocurra primero)
+  // Espera hasta que una carta quede faceup o removed
   task automatic click_until_flipped_or_removed(input [3:0] idx);
     int guard;
     begin
@@ -106,12 +105,12 @@ module tb_memory_game_top_bc;
         if (guard > 3000)
           $fatal(1, "Timeout esperando flip/remove en idx %0d", idx);
       end
-      // pequeño margen adicional
+      // pequeño margen de tiempo
       repeat (4) @(posedge clk);
     end
   endtask
 
-  // Espera a que el total REMOVED aumente en +2 (pareja completa removida)
+  // pareja completa removida
   task automatic wait_removed_pair(input [3:0] a, input [3:0] b);
     int removed_before, removed_now;
     int guard;
@@ -130,7 +129,7 @@ module tb_memory_game_top_bc;
     end
   endtask
 
-  // Espera a que DOS cartas visibles vuelvan a ocultarse (miss path)
+  // Espera a que DOS cartas visibles vuelvan a ocultarse
   task automatic wait_unflip_two(input [3:0] a, input [3:0] b);
     int guard;
     begin
@@ -146,7 +145,7 @@ module tb_memory_game_top_bc;
     end
   endtask
 
-  // Ejecuta un MATCH seguro sobre (i, i+8)
+  // Ejecuta un MATCH fijo
   task automatic do_match_pair(input [3:0] i);
     begin
       click_until_flipped_or_removed(i);
@@ -155,16 +154,14 @@ module tb_memory_game_top_bc;
     end
   endtask
 
-  // Ejecuta un MISS usando (1,2) (no forman pareja en la ROM usada)
+  // Ejecuta un MISS
   task automatic do_miss();
     logic [3:0] a, b;
     begin
       a = 4'd1; b = 4'd2;
       click_until_flipped_or_removed(a);
-      // si justo se removió la primera (no debería), cambia b
       if (card_removed_o[a]) b = 4'd3;
       click_until_flipped_or_removed(b);
-      // si por casualidad hicimos match (tampoco debería), aborta este camino
       if (card_removed_o[a] && card_removed_o[b]) begin
         $display("[%0t] Aviso: (1,2) terminó en match accidental, se continúa", $time);
         repeat (6) @(posedge clk);
@@ -174,7 +171,7 @@ module tb_memory_game_top_bc;
     end
   endtask
 
-  // Fuerza el timer_done por 1 ciclo para provocar AUTO pick
+  // Fuerza el timer_done a provocar AUTO pick
   task automatic force_timeout_one_cycle();
     begin
       force dut.timer_done = 1'b1;
@@ -184,7 +181,7 @@ module tb_memory_game_top_bc;
     end
   endtask
 
-  // Espera una reacción de autoplay (cambio en faceup o removed)
+  // autoplay 
   task automatic wait_autoplay_reaction();
     int f0, r0, guard;
     begin
@@ -219,40 +216,37 @@ module tb_memory_game_top_bc;
     // start
     pulse_start();
 
-    // ---- Caso 1: MATCH (3,11) ----
+    // ---- Caso 1: MATCH ----
     do_match_pair(4'd3);
-    // Verifica marcador y turno retenido
+    // Verifica marcador y turno
     if (p1_pairs_o != 4'd1 || p2_pairs_o != 4'd0)
       $error("Score tras primer match inválido. P1=%0d P2=%0d", p1_pairs_o, p2_pairs_o);
     if (current_player_o !== 1'b0)
       $error("Tras match, debería conservar turno P1. cur=%0b", current_player_o);
 
-    // ---- Caso 2: MISS (1,2) ----
+    // ---- Caso 2: MISS ----
     do_miss();
-    // Debió cambiar el jugador a P2
     if (current_player_o !== 1'b1)
       $error("Miss no cambió de jugador. cur=%0b", current_player_o);
 
     // ---- Caso 3: AUTO-PICK por timeout ----
-    // Forzamos timer_done dos veces para que la FSM haga AUTO1 y AUTO2
+    // La FSM haga AUTO1 y AUTO2
     force_timeout_one_cycle();   // debe llevar a S_AUTO1 -> flip
     wait_autoplay_reaction();
 
     force_timeout_one_cycle();   // debe llevar a S_AUTO2 -> flip y luego CHECK
     wait_autoplay_reaction();
 
-    // No imponemos resultado (puede ser match o miss), sólo comprobamos reacción
     $display("[%0t] Auto-pick ejercido. faceup=%0d removed=%0d",
               $time, faceup_count(), removed_count());
 
-    // Fin de prueba corta
+    // Fin de prueba
     repeat (50) @(posedge clk);
     $display("[%0t] TB OK (fin)", $time);
     $finish;
   end
 
 endmodule
-
 
 
 

@@ -1,5 +1,5 @@
-Analysis & Synthesis report for VGAFSM
-Thu Oct 09 17:25:17 2025
+Analysis & Elaboration report for VGAFSM
+Fri Oct 10 09:51:56 2025
 Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 
 
@@ -7,33 +7,20 @@ Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 ; Table of Contents ;
 ---------------------
   1. Legal Notice
-  2. Analysis & Synthesis Summary
-  3. Analysis & Synthesis Settings
-  4. Parallel Compilation
-  5. Analysis & Synthesis Source Files Read
-  6. Analysis & Synthesis Resource Usage Summary
-  7. Analysis & Synthesis Resource Utilization by Entity
-  8. Analysis & Synthesis DSP Block Usage Summary
-  9. State Machine - |memoria_fpga_top|memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|s
- 10. Registers Removed During Synthesis
- 11. General Register Statistics
- 12. Inverted Register Statistics
- 13. Multiplexer Restructuring Statistics (Restructuring Performed)
- 14. Parameter Settings for User Entity Instance: vgaController:u_vgac
- 15. Parameter Settings for User Entity Instance: btn_debouncer:u_db_start
- 16. Parameter Settings for User Entity Instance: btn_debouncer:u_db_click
- 17. Parameter Settings for User Entity Instance: memory_game_top_bc:u_game
- 18. Parameter Settings for User Entity Instance: memory_game_top_bc:u_game|board_core:u_board
- 19. Parameter Settings for User Entity Instance: videoGen_game:u_vgen|cardGrid_game:u_grid
- 20. Parameter Settings for Inferred Entity Instance: videoGen_game:u_vgen|cardGrid_game:u_grid|lpm_divide:Div0
- 21. Parameter Settings for Inferred Entity Instance: videoGen_game:u_vgen|cardGrid_game:u_grid|lpm_divide:Div1
- 22. Port Connectivity Checks: "memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm"
- 23. Port Connectivity Checks: "btn_debouncer:u_db_click"
- 24. Port Connectivity Checks: "btn_debouncer:u_db_start"
- 25. Post-Synthesis Netlist Statistics for Top Partition
- 26. Elapsed Time Per Partition
- 27. Analysis & Synthesis Messages
- 28. Analysis & Synthesis Suppressed Messages
+  2. Analysis & Elaboration Summary
+  3. Parallel Compilation
+  4. Parameter Settings for User Entity Instance: vgaController:u_vgac
+  5. Parameter Settings for User Entity Instance: btn_debouncer:u_db_start
+  6. Parameter Settings for User Entity Instance: btn_debouncer:u_db_click
+  7. Parameter Settings for User Entity Instance: memory_game_top_bc:u_game
+  8. Parameter Settings for User Entity Instance: memory_game_top_bc:u_game|board_core:u_board
+  9. Parameter Settings for User Entity Instance: videoGen_game:u_vgen|cardGrid_game:u_grid
+ 10. Analysis & Elaboration Settings
+ 11. Port Connectivity Checks: "memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm"
+ 12. Port Connectivity Checks: "btn_debouncer:u_db_click"
+ 13. Port Connectivity Checks: "btn_debouncer:u_db_start"
+ 14. Analysis & Elaboration Messages
+ 15. Analysis & Elaboration Suppressed Messages
 
 
 
@@ -57,31 +44,118 @@ https://fpgasoftware.intel.com/eula.
 
 
 
-+-------------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                                  ;
-+---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Thu Oct 09 17:25:17 2025       ;
-; Quartus Prime Version           ; 20.1.0 Build 711 06/05/2020 SJ Lite Edition ;
-; Revision Name                   ; VGAFSM                                      ;
-; Top-level Entity Name           ; memoria_fpga_top                            ;
-; Family                          ; Cyclone V                                   ;
-; Logic utilization (in ALMs)     ; N/A                                         ;
-; Total registers                 ; 264                                         ;
-; Total pins                      ; 68                                          ;
-; Total virtual pins              ; 0                                           ;
-; Total block memory bits         ; 0                                           ;
-; Total DSP Blocks                ; 8                                           ;
-; Total HSSI RX PCSs              ; 0                                           ;
-; Total HSSI PMA RX Deserializers ; 0                                           ;
-; Total HSSI TX PCSs              ; 0                                           ;
-; Total HSSI PMA TX Serializers   ; 0                                           ;
-; Total PLLs                      ; 0                                           ;
-; Total DLLs                      ; 0                                           ;
-+---------------------------------+---------------------------------------------+
++-----------------------------------------------------------------------------+
+; Analysis & Elaboration Summary                                              ;
++-------------------------------+---------------------------------------------+
+; Analysis & Elaboration Status ; Successful - Fri Oct 10 09:51:56 2025       ;
+; Quartus Prime Version         ; 20.1.0 Build 711 06/05/2020 SJ Lite Edition ;
+; Revision Name                 ; VGAFSM                                      ;
+; Top-level Entity Name         ; memoria_fpga_top                            ;
+; Family                        ; Cyclone V                                   ;
+; Logic utilization (in ALMs)   ; N/A until Partition Merge                   ;
+; Total registers               ; N/A until Partition Merge                   ;
+; Total pins                    ; N/A until Partition Merge                   ;
+; Total virtual pins            ; N/A until Partition Merge                   ;
+; Total block memory bits       ; N/A until Partition Merge                   ;
+; Total PLLs                    ; N/A until Partition Merge                   ;
+; Total DLLs                    ; N/A until Partition Merge                   ;
++-------------------------------+---------------------------------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 16          ;
+; Maximum allowed            ; 16          ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
+
+
++-------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: vgaController:u_vgac ;
++----------------+------------+-------------------------------------+
+; Parameter Name ; Value      ; Type                                ;
++----------------+------------+-------------------------------------+
+; HACTIVE        ; 1010000000 ; Unsigned Binary                     ;
+; HFP            ; 0000010000 ; Unsigned Binary                     ;
+; HSYN           ; 0001100000 ; Unsigned Binary                     ;
+; HBP            ; 0000110000 ; Unsigned Binary                     ;
+; HMAX           ; 1100100000 ; Unsigned Binary                     ;
+; VBP            ; 0000100001 ; Unsigned Binary                     ;
+; VACTIVE        ; 0111100000 ; Unsigned Binary                     ;
+; VFP            ; 0000001010 ; Unsigned Binary                     ;
+; VSYN           ; 0000000010 ; Unsigned Binary                     ;
+; VMAX           ; 1000001101 ; Unsigned Binary                     ;
++----------------+------------+-------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: btn_debouncer:u_db_start ;
++----------------+-------+----------------------------------------------+
+; Parameter Name ; Value ; Type                                         ;
++----------------+-------+----------------------------------------------+
+; CNTR_BITS      ; 18    ; Signed Integer                               ;
++----------------+-------+----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: btn_debouncer:u_db_click ;
++----------------+-------+----------------------------------------------+
+; Parameter Name ; Value ; Type                                         ;
++----------------+-------+----------------------------------------------+
+; CNTR_BITS      ; 18    ; Signed Integer                               ;
++----------------+-------+----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: memory_game_top_bc:u_game ;
++----------------+-------+-----------------------------------------------+
+; Parameter Name ; Value ; Type                                          ;
++----------------+-------+-----------------------------------------------+
+; TICKS_PER_TURN ; 300   ; Signed Integer                                ;
++----------------+-------+-----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: memory_game_top_bc:u_game|board_core:u_board ;
++----------------+-------+------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                             ;
++----------------+-------+------------------------------------------------------------------+
+; N_CARDS        ; 16    ; Signed Integer                                                   ;
++----------------+-------+------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: videoGen_game:u_vgen|cardGrid_game:u_grid ;
++----------------+-------+---------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                          ;
++----------------+-------+---------------------------------------------------------------+
+; CARDS_X        ; 4     ; Signed Integer                                                ;
+; CARDS_Y        ; 4     ; Signed Integer                                                ;
+; SCR_W          ; 640   ; Signed Integer                                                ;
+; SCR_H          ; 480   ; Signed Integer                                                ;
+; MARGIN_L       ; 20    ; Signed Integer                                                ;
+; MARGIN_R       ; 20    ; Signed Integer                                                ;
+; MARGIN_T       ; 20    ; Signed Integer                                                ;
+; MARGIN_B       ; 20    ; Signed Integer                                                ;
++----------------+-------+---------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
 +---------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Settings                                                                                             ;
+; Analysis & Elaboration Settings                                                                                           ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
@@ -167,372 +241,6 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 
 
-+------------------------------------------+
-; Parallel Compilation                     ;
-+----------------------------+-------------+
-; Processors                 ; Number      ;
-+----------------------------+-------------+
-; Number detected on machine ; 16          ;
-; Maximum allowed            ; 12          ;
-;                            ;             ;
-; Average used               ; 1.00        ;
-; Maximum used               ; 12          ;
-;                            ;             ;
-; Usage by Processor         ; % Time Used ;
-;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   0.0%      ;
-;     Processor 3            ;   0.0%      ;
-;     Processor 4            ;   0.0%      ;
-;     Processor 5            ;   0.0%      ;
-;     Processor 6            ;   0.0%      ;
-;     Processors 7-12        ;   0.0%      ;
-+----------------------------+-------------+
-
-
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                   ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                               ; Library ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------+---------+
-; memory_game_fsm_bc.sv            ; yes             ; User SystemVerilog HDL File  ; C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memory_game_fsm_bc.sv       ;         ;
-; board_core.sv                    ; yes             ; User SystemVerilog HDL File  ; C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/board_core.sv               ;         ;
-; pair_check_rom.sv                ; yes             ; User SystemVerilog HDL File  ; C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/pair_check_rom.sv           ;         ;
-; memory_game_top_bc.sv            ; yes             ; User SystemVerilog HDL File  ; C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memory_game_top_bc.sv       ;         ;
-; vgaController.sv                 ; yes             ; User SystemVerilog HDL File  ; C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/vgaController.sv            ;         ;
-; videoGen.sv                      ; yes             ; User SystemVerilog HDL File  ; C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/videoGen.sv                 ;         ;
-; rectgen.sv                       ; yes             ; User SystemVerilog HDL File  ; C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/rectgen.sv                  ;         ;
-; btn_debouncer.sv                 ; yes             ; User SystemVerilog HDL File  ; C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/btn_debouncer.sv            ;         ;
-; cardGrid_game.sv                 ; yes             ; User SystemVerilog HDL File  ; C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/cardGrid_game.sv            ;         ;
-; memoria_fpga_top.sv              ; yes             ; User SystemVerilog HDL File  ; C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memoria_fpga_top.sv         ;         ;
-; turn_leds.sv                     ; yes             ; User SystemVerilog HDL File  ; C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/turn_leds.sv                ;         ;
-; scoreboard_pairs.sv              ; yes             ; User SystemVerilog HDL File  ; C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/scoreboard_pairs.sv         ;         ;
-; hex7seg_decoder.sv               ; yes             ; User SystemVerilog HDL File  ; C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/hex7seg_decoder.sv          ;         ;
-; lpm_divide.tdf                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/lpm_divide.tdf      ;         ;
-; abs_divider.inc                  ; yes             ; Megafunction                 ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/abs_divider.inc     ;         ;
-; sign_div_unsign.inc              ; yes             ; Megafunction                 ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/sign_div_unsign.inc ;         ;
-; aglobal201.inc                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/20.1/quartus/libraries/megafunctions/aglobal201.inc      ;         ;
-; db/lpm_divide_fpo.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/db/lpm_divide_fpo.tdf       ;         ;
-; db/abs_divider_obg.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/db/abs_divider_obg.tdf      ;         ;
-; db/alt_u_div_00f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/db/alt_u_div_00f.tdf        ;         ;
-; db/lpm_abs_on9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/db/lpm_abs_on9.tdf          ;         ;
-; db/lpm_abs_4p9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/db/lpm_abs_4p9.tdf          ;         ;
-; db/lpm_divide_epo.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/db/lpm_divide_epo.tdf       ;         ;
-; db/abs_divider_nbg.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/db/abs_divider_nbg.tdf      ;         ;
-; db/alt_u_div_uve.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/db/alt_u_div_uve.tdf        ;         ;
-; db/lpm_abs_nn9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/db/lpm_abs_nn9.tdf          ;         ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------+---------+
-
-
-+-----------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary               ;
-+---------------------------------------------+-------------+
-; Resource                                    ; Usage       ;
-+---------------------------------------------+-------------+
-; Estimate of Logic utilization (ALMs needed) ; 1062        ;
-;                                             ;             ;
-; Combinational ALUT usage for logic          ; 1881        ;
-;     -- 7 input functions                    ; 7           ;
-;     -- 6 input functions                    ; 234         ;
-;     -- 5 input functions                    ; 152         ;
-;     -- 4 input functions                    ; 341         ;
-;     -- <=3 input functions                  ; 1147        ;
-;                                             ;             ;
-; Dedicated logic registers                   ; 264         ;
-;                                             ;             ;
-; I/O pins                                    ; 68          ;
-;                                             ;             ;
-; Total DSP Blocks                            ; 8           ;
-;                                             ;             ;
-; Maximum fan-out node                        ; clk50~input ;
-; Maximum fan-out                             ; 196         ;
-; Total fan-out                               ; 7526        ;
-; Average fan-out                             ; 3.29        ;
-+---------------------------------------------+-------------+
-
-
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                                 ;
-+---------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------+--------------+
-; Compilation Hierarchy Node                  ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                      ; Entity Name        ; Library Name ;
-+---------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------+--------------+
-; |memoria_fpga_top                           ; 1881 (5)            ; 264 (0)                   ; 0                 ; 8          ; 68   ; 0            ; |memoria_fpga_top                                                                                                                                        ; memoria_fpga_top   ; work         ;
-;    |btn_debouncer:u_db_click|               ; 24 (24)             ; 22 (22)                   ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|btn_debouncer:u_db_click                                                                                                               ; btn_debouncer      ; work         ;
-;    |btn_debouncer:u_db_start|               ; 25 (25)             ; 22 (22)                   ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|btn_debouncer:u_db_start                                                                                                               ; btn_debouncer      ; work         ;
-;    |hex7seg_active_low:u_hex_p1|            ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|hex7seg_active_low:u_hex_p1                                                                                                            ; hex7seg_active_low ; work         ;
-;    |hex7seg_active_low:u_hex_p2|            ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|hex7seg_active_low:u_hex_p2                                                                                                            ; hex7seg_active_low ; work         ;
-;    |hex7seg_active_low:u_hex_timer|         ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|hex7seg_active_low:u_hex_timer                                                                                                         ; hex7seg_active_low ; work         ;
-;    |memory_game_top_bc:u_game|              ; 499 (57)            ; 125 (41)                  ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|memory_game_top_bc:u_game                                                                                                              ; memory_game_top_bc ; work         ;
-;       |board_core:u_board|                  ; 354 (354)           ; 35 (35)                   ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|memory_game_top_bc:u_game|board_core:u_board                                                                                           ; board_core         ; work         ;
-;       |memory_game_fsm_bc:u_fsm|            ; 73 (73)             ; 38 (38)                   ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm                                                                                     ; memory_game_fsm_bc ; work         ;
-;       |pair_check_rom:u_pair|               ; 3 (3)               ; 3 (3)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|memory_game_top_bc:u_game|pair_check_rom:u_pair                                                                                        ; pair_check_rom     ; work         ;
-;       |scoreboard_pairs:u_score|            ; 12 (12)             ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|memory_game_top_bc:u_game|scoreboard_pairs:u_score                                                                                     ; scoreboard_pairs   ; work         ;
-;    |pll:u_pll|                              ; 1 (1)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|pll:u_pll                                                                                                                              ; pll                ; work         ;
-;    |turn_leds:u_leds|                       ; 28 (28)             ; 26 (26)                   ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|turn_leds:u_leds                                                                                                                       ; turn_leds          ; work         ;
-;    |vgaController:u_vgac|                   ; 32 (32)             ; 20 (20)                   ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|vgaController:u_vgac                                                                                                                   ; vgaController      ; work         ;
-;    |videoGen_game:u_vgen|                   ; 1246 (77)           ; 48 (24)                   ; 0                 ; 8          ; 0    ; 0            ; |memoria_fpga_top|videoGen_game:u_vgen                                                                                                                   ; videoGen_game      ; work         ;
-;       |cardGrid_game:u_grid|                ; 1169 (742)          ; 24 (24)                   ; 0                 ; 8          ; 0    ; 0            ; |memoria_fpga_top|videoGen_game:u_vgen|cardGrid_game:u_grid                                                                                              ; cardGrid_game      ; work         ;
-;          |lpm_divide:Div0|                  ; 224 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|videoGen_game:u_vgen|cardGrid_game:u_grid|lpm_divide:Div0                                                                              ; lpm_divide         ; work         ;
-;             |lpm_divide_fpo:auto_generated| ; 224 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|videoGen_game:u_vgen|cardGrid_game:u_grid|lpm_divide:Div0|lpm_divide_fpo:auto_generated                                                ; lpm_divide_fpo     ; work         ;
-;                |abs_divider_obg:divider|    ; 224 (22)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|videoGen_game:u_vgen|cardGrid_game:u_grid|lpm_divide:Div0|lpm_divide_fpo:auto_generated|abs_divider_obg:divider                        ; abs_divider_obg    ; work         ;
-;                   |alt_u_div_00f:divider|   ; 191 (191)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|videoGen_game:u_vgen|cardGrid_game:u_grid|lpm_divide:Div0|lpm_divide_fpo:auto_generated|abs_divider_obg:divider|alt_u_div_00f:divider  ; alt_u_div_00f      ; work         ;
-;                   |lpm_abs_4p9:my_abs_num|  ; 11 (11)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|videoGen_game:u_vgen|cardGrid_game:u_grid|lpm_divide:Div0|lpm_divide_fpo:auto_generated|abs_divider_obg:divider|lpm_abs_4p9:my_abs_num ; lpm_abs_4p9        ; work         ;
-;          |lpm_divide:Div1|                  ; 203 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|videoGen_game:u_vgen|cardGrid_game:u_grid|lpm_divide:Div1                                                                              ; lpm_divide         ; work         ;
-;             |lpm_divide_epo:auto_generated| ; 203 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|videoGen_game:u_vgen|cardGrid_game:u_grid|lpm_divide:Div1|lpm_divide_epo:auto_generated                                                ; lpm_divide_epo     ; work         ;
-;                |abs_divider_nbg:divider|    ; 203 (22)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|videoGen_game:u_vgen|cardGrid_game:u_grid|lpm_divide:Div1|lpm_divide_epo:auto_generated|abs_divider_nbg:divider                        ; abs_divider_nbg    ; work         ;
-;                   |alt_u_div_uve:divider|   ; 170 (170)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|videoGen_game:u_vgen|cardGrid_game:u_grid|lpm_divide:Div1|lpm_divide_epo:auto_generated|abs_divider_nbg:divider|alt_u_div_uve:divider  ; alt_u_div_uve      ; work         ;
-;                   |lpm_abs_4p9:my_abs_num|  ; 11 (11)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |memoria_fpga_top|videoGen_game:u_vgen|cardGrid_game:u_grid|lpm_divide:Div1|lpm_divide_epo:auto_generated|abs_divider_nbg:divider|lpm_abs_4p9:my_abs_num ; lpm_abs_4p9        ; work         ;
-+---------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------+--------------+
-Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
-
-
-+-------------------------------------------------+
-; Analysis & Synthesis DSP Block Usage Summary    ;
-+-----------------------------------+-------------+
-; Statistic                         ; Number Used ;
-+-----------------------------------+-------------+
-; Two Independent 18x18             ; 4           ;
-; Independent 18x18 plus 36         ; 2           ;
-; Sum of two 18x18                  ; 2           ;
-; Total number of DSP blocks        ; 8           ;
-;                                   ;             ;
-; Fixed Point Unsigned Multiplier   ; 4           ;
-; Fixed Point Mixed Sign Multiplier ; 6           ;
-+-----------------------------------+-------------+
-
-
-Encoding Type:  One-Hot
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |memoria_fpga_top|memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|s                                                                                                                                                                                                                                                                                                                                     ;
-+------------------+--------------+-----------------+-----------------+----------------+-----------------+----------------+---------------+------------------+-----------------+------------------+-----------------+-----------+----------------+--------------+----------------+-----------+-----------+----------------+--------------+----------------+-----------+-----------+--------------+----------------+----------+
-; Name             ; s.S_GAMEOVER ; s.S_NEXT_PLAYER ; s.S_MISS_WAIT_B ; s.S_MISS_UNF_B ; s.S_MISS_WAIT_A ; s.S_MISS_UNF_A ; s.S_NEXT_SAME ; s.S_MATCH_WAIT_B ; s.S_MATCH_REM_B ; s.S_MATCH_WAIT_A ; s.S_MATCH_REM_A ; s.S_CHECK ; s.S_WAIT_FLIP2 ; s.S_DO_FLIP2 ; s.S_PREP_FLIP2 ; s.S_AUTO2 ; s.S_PICK2 ; s.S_WAIT_FLIP1 ; s.S_DO_FLIP1 ; s.S_PREP_FLIP1 ; s.S_AUTO1 ; s.S_PICK1 ; s.S_NEW_TURN ; s.S_WAIT_START ; s.S_IDLE ;
-+------------------+--------------+-----------------+-----------------+----------------+-----------------+----------------+---------------+------------------+-----------------+------------------+-----------------+-----------+----------------+--------------+----------------+-----------+-----------+----------------+--------------+----------------+-----------+-----------+--------------+----------------+----------+
-; s.S_IDLE         ; 0            ; 0               ; 0               ; 0              ; 0               ; 0              ; 0             ; 0                ; 0               ; 0                ; 0               ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0            ; 0              ; 0        ;
-; s.S_WAIT_START   ; 0            ; 0               ; 0               ; 0              ; 0               ; 0              ; 0             ; 0                ; 0               ; 0                ; 0               ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0            ; 1              ; 1        ;
-; s.S_NEW_TURN     ; 0            ; 0               ; 0               ; 0              ; 0               ; 0              ; 0             ; 0                ; 0               ; 0                ; 0               ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 1            ; 0              ; 1        ;
-; s.S_PICK1        ; 0            ; 0               ; 0               ; 0              ; 0               ; 0              ; 0             ; 0                ; 0               ; 0                ; 0               ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0              ; 0            ; 0              ; 0         ; 1         ; 0            ; 0              ; 1        ;
-; s.S_AUTO1        ; 0            ; 0               ; 0               ; 0              ; 0               ; 0              ; 0             ; 0                ; 0               ; 0                ; 0               ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0              ; 0            ; 0              ; 1         ; 0         ; 0            ; 0              ; 1        ;
-; s.S_PREP_FLIP1   ; 0            ; 0               ; 0               ; 0              ; 0               ; 0              ; 0             ; 0                ; 0               ; 0                ; 0               ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0              ; 0            ; 1              ; 0         ; 0         ; 0            ; 0              ; 1        ;
-; s.S_DO_FLIP1     ; 0            ; 0               ; 0               ; 0              ; 0               ; 0              ; 0             ; 0                ; 0               ; 0                ; 0               ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0              ; 1            ; 0              ; 0         ; 0         ; 0            ; 0              ; 1        ;
-; s.S_WAIT_FLIP1   ; 0            ; 0               ; 0               ; 0              ; 0               ; 0              ; 0             ; 0                ; 0               ; 0                ; 0               ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 1              ; 0            ; 0              ; 0         ; 0         ; 0            ; 0              ; 1        ;
-; s.S_PICK2        ; 0            ; 0               ; 0               ; 0              ; 0               ; 0              ; 0             ; 0                ; 0               ; 0                ; 0               ; 0         ; 0              ; 0            ; 0              ; 0         ; 1         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0            ; 0              ; 1        ;
-; s.S_AUTO2        ; 0            ; 0               ; 0               ; 0              ; 0               ; 0              ; 0             ; 0                ; 0               ; 0                ; 0               ; 0         ; 0              ; 0            ; 0              ; 1         ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0            ; 0              ; 1        ;
-; s.S_PREP_FLIP2   ; 0            ; 0               ; 0               ; 0              ; 0               ; 0              ; 0             ; 0                ; 0               ; 0                ; 0               ; 0         ; 0              ; 0            ; 1              ; 0         ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0            ; 0              ; 1        ;
-; s.S_DO_FLIP2     ; 0            ; 0               ; 0               ; 0              ; 0               ; 0              ; 0             ; 0                ; 0               ; 0                ; 0               ; 0         ; 0              ; 1            ; 0              ; 0         ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0            ; 0              ; 1        ;
-; s.S_WAIT_FLIP2   ; 0            ; 0               ; 0               ; 0              ; 0               ; 0              ; 0             ; 0                ; 0               ; 0                ; 0               ; 0         ; 1              ; 0            ; 0              ; 0         ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0            ; 0              ; 1        ;
-; s.S_CHECK        ; 0            ; 0               ; 0               ; 0              ; 0               ; 0              ; 0             ; 0                ; 0               ; 0                ; 0               ; 1         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0            ; 0              ; 1        ;
-; s.S_MATCH_REM_A  ; 0            ; 0               ; 0               ; 0              ; 0               ; 0              ; 0             ; 0                ; 0               ; 0                ; 1               ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0            ; 0              ; 1        ;
-; s.S_MATCH_WAIT_A ; 0            ; 0               ; 0               ; 0              ; 0               ; 0              ; 0             ; 0                ; 0               ; 1                ; 0               ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0            ; 0              ; 1        ;
-; s.S_MATCH_REM_B  ; 0            ; 0               ; 0               ; 0              ; 0               ; 0              ; 0             ; 0                ; 1               ; 0                ; 0               ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0            ; 0              ; 1        ;
-; s.S_MATCH_WAIT_B ; 0            ; 0               ; 0               ; 0              ; 0               ; 0              ; 0             ; 1                ; 0               ; 0                ; 0               ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0            ; 0              ; 1        ;
-; s.S_NEXT_SAME    ; 0            ; 0               ; 0               ; 0              ; 0               ; 0              ; 1             ; 0                ; 0               ; 0                ; 0               ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0            ; 0              ; 1        ;
-; s.S_MISS_UNF_A   ; 0            ; 0               ; 0               ; 0              ; 0               ; 1              ; 0             ; 0                ; 0               ; 0                ; 0               ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0            ; 0              ; 1        ;
-; s.S_MISS_WAIT_A  ; 0            ; 0               ; 0               ; 0              ; 1               ; 0              ; 0             ; 0                ; 0               ; 0                ; 0               ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0            ; 0              ; 1        ;
-; s.S_MISS_UNF_B   ; 0            ; 0               ; 0               ; 1              ; 0               ; 0              ; 0             ; 0                ; 0               ; 0                ; 0               ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0            ; 0              ; 1        ;
-; s.S_MISS_WAIT_B  ; 0            ; 0               ; 1               ; 0              ; 0               ; 0              ; 0             ; 0                ; 0               ; 0                ; 0               ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0            ; 0              ; 1        ;
-; s.S_NEXT_PLAYER  ; 0            ; 1               ; 0               ; 0              ; 0               ; 0              ; 0             ; 0                ; 0               ; 0                ; 0               ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0            ; 0              ; 1        ;
-; s.S_GAMEOVER     ; 1            ; 0               ; 0               ; 0              ; 0               ; 0              ; 0             ; 0                ; 0               ; 0                ; 0               ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0              ; 0            ; 0              ; 0         ; 0         ; 0            ; 0              ; 1        ;
-+------------------+--------------+-----------------+-----------------+----------------+-----------------+----------------+---------------+------------------+-----------------+------------------+-----------------+-----------+----------------+--------------+----------------+-----------+-----------+----------------+--------------+----------------+-----------+-----------+--------------+----------------+----------+
-
-
-+-----------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                          ;
-+--------------------------------------------------------+--------------------+
-; Register name                                          ; Reason for Removal ;
-+--------------------------------------------------------+--------------------+
-; memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|s~4 ; Lost fanout        ;
-; memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|s~5 ; Lost fanout        ;
-; memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|s~6 ; Lost fanout        ;
-; memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|s~7 ; Lost fanout        ;
-; memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|s~8 ; Lost fanout        ;
-; memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|s~9 ; Lost fanout        ;
-; Total Number of Removed Registers = 6                  ;                    ;
-+--------------------------------------------------------+--------------------+
-
-
-+------------------------------------------------------+
-; General Register Statistics                          ;
-+----------------------------------------------+-------+
-; Statistic                                    ; Value ;
-+----------------------------------------------+-------+
-; Total registers                              ; 264   ;
-; Number of registers using Synchronous Clear  ; 122   ;
-; Number of registers using Synchronous Load   ; 9     ;
-; Number of registers using Asynchronous Clear ; 195   ;
-; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 34    ;
-; Number of registers using Preset             ; 0     ;
-+----------------------------------------------+-------+
-
-
-+--------------------------------------------------+
-; Inverted Register Statistics                     ;
-+----------------------------------------+---------+
-; Inverted Register                      ; Fan out ;
-+----------------------------------------+---------+
-; btn_debouncer:u_db_start|stable_q      ; 4       ;
-; btn_debouncer:u_db_start|btn_sync1     ; 2       ;
-; btn_debouncer:u_db_click|stable_q      ; 4       ;
-; memory_game_top_bc:u_game|lfsr_q[3]    ; 3       ;
-; memory_game_top_bc:u_game|lfsr_q[1]    ; 10      ;
-; btn_debouncer:u_db_start|btn_sync0     ; 1       ;
-; btn_debouncer:u_db_click|btn_sync1     ; 2       ;
-; btn_debouncer:u_db_click|btn_sync0     ; 1       ;
-; Total number of inverted registers = 8 ;         ;
-+----------------------------------------+---------+
-
-
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                   ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                         ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------+
-; 3:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |memoria_fpga_top|videoGen_game:u_vgen|r[2]                                        ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |memoria_fpga_top|memory_game_top_bc:u_game|scoreboard_pairs:u_score|p1_pairs[1]   ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |memoria_fpga_top|memory_game_top_bc:u_game|scoreboard_pairs:u_score|p2_pairs[0]   ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |memoria_fpga_top|memory_game_top_bc:u_game|seconds_q[3]                           ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |memoria_fpga_top|memory_game_top_bc:u_game|seconds_q[4]                           ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 0 LEs                ; 36 LEs                 ; Yes        ; |memoria_fpga_top|btn_debouncer:u_db_start|cnt_q[10]                               ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 0 LEs                ; 36 LEs                 ; Yes        ; |memoria_fpga_top|btn_debouncer:u_db_click|cnt_q[17]                               ;
-; 3:1                ; 26 bits   ; 52 LEs        ; 0 LEs                ; 52 LEs                 ; Yes        ; |memoria_fpga_top|memory_game_top_bc:u_game|ps_cnt_q[25]                           ;
-; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |memoria_fpga_top|memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|idx_target[0] ;
-; 9:1                ; 6 bits    ; 36 LEs        ; 36 LEs               ; 0 LEs                  ; Yes        ; |memoria_fpga_top|videoGen_game:u_vgen|cardGrid_game:u_grid|r[6]                   ;
-; 16:1               ; 15 bits   ; 150 LEs       ; 150 LEs              ; 0 LEs                  ; Yes        ; |memoria_fpga_top|videoGen_game:u_vgen|cardGrid_game:u_grid|g[2]                   ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|board_core:u_board|state_q             ;
-; 16:1               ; 2 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|board_core:u_board|Mux0                ;
-; 16:1               ; 2 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|board_core:u_board|Mux2                ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|Selector25    ;
-; 16:1               ; 2 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|board_core:u_board|Mux5                ;
-; 17:1               ; 2 bits    ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; No         ; |memoria_fpga_top|videoGen_game:u_vgen|cardGrid_game:u_grid|is_removed             ;
-; 17:1               ; 3 bits    ; 33 LEs        ; 15 LEs               ; 18 LEs                 ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|Selector5     ;
-; 19:1               ; 2 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|Selector9     ;
-; 19:1               ; 2 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|Selector16    ;
-; 19:1               ; 2 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|Selector23    ;
-; 19:1               ; 2 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; No         ; |memoria_fpga_top|memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm|Selector14    ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------+
-
-
-+-------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: vgaController:u_vgac ;
-+----------------+------------+-------------------------------------+
-; Parameter Name ; Value      ; Type                                ;
-+----------------+------------+-------------------------------------+
-; HACTIVE        ; 1010000000 ; Unsigned Binary                     ;
-; HFP            ; 0000010000 ; Unsigned Binary                     ;
-; HSYN           ; 0001100000 ; Unsigned Binary                     ;
-; HBP            ; 0000110000 ; Unsigned Binary                     ;
-; HMAX           ; 1100100000 ; Unsigned Binary                     ;
-; VBP            ; 0000100001 ; Unsigned Binary                     ;
-; VACTIVE        ; 0111100000 ; Unsigned Binary                     ;
-; VFP            ; 0000001010 ; Unsigned Binary                     ;
-; VSYN           ; 0000000010 ; Unsigned Binary                     ;
-; VMAX           ; 1000001101 ; Unsigned Binary                     ;
-+----------------+------------+-------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: btn_debouncer:u_db_start ;
-+----------------+-------+----------------------------------------------+
-; Parameter Name ; Value ; Type                                         ;
-+----------------+-------+----------------------------------------------+
-; CNTR_BITS      ; 18    ; Signed Integer                               ;
-+----------------+-------+----------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: btn_debouncer:u_db_click ;
-+----------------+-------+----------------------------------------------+
-; Parameter Name ; Value ; Type                                         ;
-+----------------+-------+----------------------------------------------+
-; CNTR_BITS      ; 18    ; Signed Integer                               ;
-+----------------+-------+----------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: memory_game_top_bc:u_game ;
-+----------------+-------+-----------------------------------------------+
-; Parameter Name ; Value ; Type                                          ;
-+----------------+-------+-----------------------------------------------+
-; TICKS_PER_TURN ; 300   ; Signed Integer                                ;
-+----------------+-------+-----------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: memory_game_top_bc:u_game|board_core:u_board ;
-+----------------+-------+------------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                             ;
-+----------------+-------+------------------------------------------------------------------+
-; N_CARDS        ; 16    ; Signed Integer                                                   ;
-+----------------+-------+------------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+----------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: videoGen_game:u_vgen|cardGrid_game:u_grid ;
-+----------------+-------+---------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                          ;
-+----------------+-------+---------------------------------------------------------------+
-; CARDS_X        ; 4     ; Signed Integer                                                ;
-; CARDS_Y        ; 4     ; Signed Integer                                                ;
-; SCR_W          ; 640   ; Signed Integer                                                ;
-; SCR_H          ; 480   ; Signed Integer                                                ;
-; MARGIN_L       ; 20    ; Signed Integer                                                ;
-; MARGIN_R       ; 20    ; Signed Integer                                                ;
-; MARGIN_T       ; 20    ; Signed Integer                                                ;
-; MARGIN_B       ; 20    ; Signed Integer                                                ;
-+----------------+-------+---------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+------------------------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: videoGen_game:u_vgen|cardGrid_game:u_grid|lpm_divide:Div0 ;
-+------------------------+----------------+------------------------------------------------------------------+
-; Parameter Name         ; Value          ; Type                                                             ;
-+------------------------+----------------+------------------------------------------------------------------+
-; LPM_WIDTHN             ; 32             ; Untyped                                                          ;
-; LPM_WIDTHD             ; 9              ; Untyped                                                          ;
-; LPM_NREPRESENTATION    ; SIGNED         ; Untyped                                                          ;
-; LPM_DREPRESENTATION    ; SIGNED         ; Untyped                                                          ;
-; LPM_PIPELINE           ; 0              ; Untyped                                                          ;
-; LPM_REMAINDERPOSITIVE  ; FALSE          ; Untyped                                                          ;
-; MAXIMIZE_SPEED         ; 5              ; Untyped                                                          ;
-; CBXI_PARAMETER         ; lpm_divide_fpo ; Untyped                                                          ;
-; CARRY_CHAIN            ; MANUAL         ; Untyped                                                          ;
-; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                                          ;
-; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                                       ;
-; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                                     ;
-; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                                     ;
-; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                                   ;
-+------------------------+----------------+------------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+------------------------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: videoGen_game:u_vgen|cardGrid_game:u_grid|lpm_divide:Div1 ;
-+------------------------+----------------+------------------------------------------------------------------+
-; Parameter Name         ; Value          ; Type                                                             ;
-+------------------------+----------------+------------------------------------------------------------------+
-; LPM_WIDTHN             ; 32             ; Untyped                                                          ;
-; LPM_WIDTHD             ; 8              ; Untyped                                                          ;
-; LPM_NREPRESENTATION    ; SIGNED         ; Untyped                                                          ;
-; LPM_DREPRESENTATION    ; SIGNED         ; Untyped                                                          ;
-; LPM_PIPELINE           ; 0              ; Untyped                                                          ;
-; LPM_REMAINDERPOSITIVE  ; FALSE          ; Untyped                                                          ;
-; MAXIMIZE_SPEED         ; 5              ; Untyped                                                          ;
-; CBXI_PARAMETER         ; lpm_divide_epo ; Untyped                                                          ;
-; CARRY_CHAIN            ; MANUAL         ; Untyped                                                          ;
-; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                                          ;
-; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                                       ;
-; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                                     ;
-; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                                     ;
-; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                                   ;
-+------------------------+----------------+------------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
 +--------------------------------------------------------------------------------------------------------------------------+
 ; Port Connectivity Checks: "memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm"                                           ;
 +----------------+--------+----------+-------------------------------------------------------------------------------------+
@@ -562,177 +270,80 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------+--------+----------+-------------------------------------------------------------------------------------+
 
 
-+-----------------------------------------------------+
-; Post-Synthesis Netlist Statistics for Top Partition ;
-+-----------------------+-----------------------------+
-; Type                  ; Count                       ;
-+-----------------------+-----------------------------+
-; arriav_ff             ; 264                         ;
-;     CLR               ; 107                         ;
-;     CLR SCLR          ; 63                          ;
-;     CLR SLD           ; 1                           ;
-;     ENA CLR           ; 16                          ;
-;     ENA CLR SLD       ; 8                           ;
-;     ENA SCLR          ; 10                          ;
-;     SCLR              ; 49                          ;
-;     plain             ; 10                          ;
-; arriav_lcell_comb     ; 1885                        ;
-;     arith             ; 904                         ;
-;         0 data inputs ; 56                          ;
-;         1 data inputs ; 485                         ;
-;         2 data inputs ; 121                         ;
-;         3 data inputs ; 71                          ;
-;         4 data inputs ; 171                         ;
-;     extend            ; 7                           ;
-;         7 data inputs ; 7                           ;
-;     normal            ; 909                         ;
-;         0 data inputs ; 1                           ;
-;         1 data inputs ; 11                          ;
-;         2 data inputs ; 189                         ;
-;         3 data inputs ; 152                         ;
-;         4 data inputs ; 170                         ;
-;         5 data inputs ; 152                         ;
-;         6 data inputs ; 234                         ;
-;     shared            ; 65                          ;
-;         0 data inputs ; 13                          ;
-;         1 data inputs ; 6                           ;
-;         2 data inputs ; 32                          ;
-;         3 data inputs ; 14                          ;
-; arriav_mac            ; 8                           ;
-; boundary_port         ; 68                          ;
-;                       ;                             ;
-; Max LUT depth         ; 28.70                       ;
-; Average LUT depth     ; 14.09                       ;
-+-----------------------+-----------------------------+
-
-
-+-------------------------------+
-; Elapsed Time Per Partition    ;
-+----------------+--------------+
-; Partition Name ; Elapsed Time ;
-+----------------+--------------+
-; Top            ; 00:00:06     ;
-+----------------+--------------+
-
-
-+-------------------------------+
-; Analysis & Synthesis Messages ;
-+-------------------------------+
++---------------------------------+
+; Analysis & Elaboration Messages ;
++---------------------------------+
 Info: *******************************************************************
-Info: Running Quartus Prime Analysis & Synthesis
+Info: Running Quartus Prime Analysis & Elaboration
     Info: Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
-    Info: Processing started: Thu Oct 09 17:25:01 2025
-Info: Command: quartus_map --read_settings_files=on --write_settings_files=off VGAFSM -c VGAFSM
+    Info: Processing started: Fri Oct 10 09:51:46 2025
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off VGAFSM -c VGAFSM --analysis_and_elaboration
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 12 of the 12 processors detected
+Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file memory_game_fsm_bc.sv
-    Info (12023): Found entity 1: memory_game_fsm_bc File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memory_game_fsm_bc.sv Line: 9
+    Info (12023): Found entity 1: memory_game_fsm_bc File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memory_game_fsm_bc.sv Line: 7
 Info (12021): Found 1 design units, including 1 entities, in source file board_core.sv
-    Info (12023): Found entity 1: board_core File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/board_core.sv Line: 7
+    Info (12023): Found entity 1: board_core File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/board_core.sv Line: 5
 Info (12021): Found 1 design units, including 1 entities, in source file pair_check_rom.sv
-    Info (12023): Found entity 1: pair_check_rom File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/pair_check_rom.sv Line: 6
+    Info (12023): Found entity 1: pair_check_rom File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/pair_check_rom.sv Line: 5
 Info (12021): Found 1 design units, including 1 entities, in source file board_pair_top.sv
-    Info (12023): Found entity 1: board_pair_top File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/board_pair_top.sv Line: 5
+    Info (12023): Found entity 1: board_pair_top File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/board_pair_top.sv Line: 5
 Info (12021): Found 1 design units, including 1 entities, in source file memory_game_top_bc.sv
-    Info (12023): Found entity 1: memory_game_top_bc File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memory_game_top_bc.sv Line: 1
+    Info (12023): Found entity 1: memory_game_top_bc File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memory_game_top_bc.sv Line: 6
 Info (12021): Found 1 design units, including 1 entities, in source file vgacontroller.sv
-    Info (12023): Found entity 1: vgaController File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/vgaController.sv Line: 1
+    Info (12023): Found entity 1: vgaController File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/vgaController.sv Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file videogen.sv
-    Info (12023): Found entity 1: videoGen_game File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/videoGen.sv Line: 7
+    Info (12023): Found entity 1: videoGen_game File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/videoGen.sv Line: 7
 Info (12021): Found 1 design units, including 1 entities, in source file vga.sv
-    Info (12023): Found entity 1: vga File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/vga.sv Line: 1
+    Info (12023): Found entity 1: vga File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/vga.sv Line: 1
 Info (12021): Found 2 design units, including 2 entities, in source file rectgen.sv
-    Info (12023): Found entity 1: rectgen File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/rectgen.sv Line: 1
-    Info (12023): Found entity 2: pll File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/rectgen.sv Line: 8
+    Info (12023): Found entity 1: rectgen File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/rectgen.sv Line: 1
+    Info (12023): Found entity 2: pll File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/rectgen.sv Line: 8
 Info (12021): Found 1 design units, including 1 entities, in source file top_fpga.sv
-    Info (12023): Found entity 1: top_fpga File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/top_fpga.sv Line: 1
+    Info (12023): Found entity 1: top_fpga File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/top_fpga.sv Line: 5
 Info (12021): Found 1 design units, including 1 entities, in source file btn_debouncer.sv
-    Info (12023): Found entity 1: btn_debouncer File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/btn_debouncer.sv Line: 2
+    Info (12023): Found entity 1: btn_debouncer File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/btn_debouncer.sv Line: 2
 Info (12021): Found 1 design units, including 1 entities, in source file cardgrid_game.sv
-    Info (12023): Found entity 1: cardGrid_game File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/cardGrid_game.sv Line: 2
+    Info (12023): Found entity 1: cardGrid_game File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/cardGrid_game.sv Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file memoria_fpga_top.sv
-    Info (12023): Found entity 1: memoria_fpga_top File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memoria_fpga_top.sv Line: 1
+    Info (12023): Found entity 1: memoria_fpga_top File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memoria_fpga_top.sv Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file turn_leds.sv
-    Info (12023): Found entity 1: turn_leds File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/turn_leds.sv Line: 2
+    Info (12023): Found entity 1: turn_leds File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/turn_leds.sv Line: 4
 Info (12021): Found 1 design units, including 1 entities, in source file scoreboard_pairs.sv
-    Info (12023): Found entity 1: scoreboard_pairs File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/scoreboard_pairs.sv Line: 8
+    Info (12023): Found entity 1: scoreboard_pairs File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/scoreboard_pairs.sv Line: 7
 Info (12021): Found 1 design units, including 1 entities, in source file hex7seg_decoder.sv
-    Info (12023): Found entity 1: hex7seg_active_low File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/hex7seg_decoder.sv Line: 5
+    Info (12023): Found entity 1: hex7seg_active_low File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/hex7seg_decoder.sv Line: 4
 Info (12021): Found 1 design units, including 1 entities, in source file tb_memory_game_top_bc.sv
-    Info (12023): Found entity 1: tb_memory_game_top_bc File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/tb_memory_game_top_bc.sv Line: 12
+    Info (12023): Found entity 1: tb_memory_game_top_bc File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/tb_memory_game_top_bc.sv Line: 3
 Info (12127): Elaborating entity "memoria_fpga_top" for the top level hierarchy
-Info (12128): Elaborating entity "pll" for hierarchy "pll:u_pll" File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memoria_fpga_top.sv Line: 30
-Info (12128): Elaborating entity "vgaController" for hierarchy "vgaController:u_vgac" File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memoria_fpga_top.sv Line: 41
-Info (12128): Elaborating entity "btn_debouncer" for hierarchy "btn_debouncer:u_db_start" File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memoria_fpga_top.sv Line: 53
-Info (12128): Elaborating entity "memory_game_top_bc" for hierarchy "memory_game_top_bc:u_game" File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memoria_fpga_top.sv Line: 86
-Info (12128): Elaborating entity "board_core" for hierarchy "memory_game_top_bc:u_game|board_core:u_board" File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memory_game_top_bc.sv Line: 161
-Info (12128): Elaborating entity "pair_check_rom" for hierarchy "memory_game_top_bc:u_game|pair_check_rom:u_pair" File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memory_game_top_bc.sv Line: 174
-Info (12128): Elaborating entity "memory_game_fsm_bc" for hierarchy "memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm" File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memory_game_top_bc.sv Line: 214
-Warning (10036): Verilog HDL or VHDL warning at memory_game_fsm_bc.sv(107): object "last_match" assigned a value but never read File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memory_game_fsm_bc.sv Line: 107
-Info (10264): Verilog HDL Case Statement information at memory_game_fsm_bc.sv(129): all case item expressions in this case statement are onehot File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memory_game_fsm_bc.sv Line: 129
-Info (12128): Elaborating entity "scoreboard_pairs" for hierarchy "memory_game_top_bc:u_game|scoreboard_pairs:u_score" File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memory_game_top_bc.sv Line: 226
-Info (12128): Elaborating entity "turn_leds" for hierarchy "turn_leds:u_leds" File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memoria_fpga_top.sv Line: 96
-Info (12128): Elaborating entity "hex7seg_active_low" for hierarchy "hex7seg_active_low:u_hex_p1" File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memoria_fpga_top.sv Line: 106
-Info (12128): Elaborating entity "videoGen_game" for hierarchy "videoGen_game:u_vgen" File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/memoria_fpga_top.sv Line: 140
-Info (10264): Verilog HDL Case Statement information at videoGen.sv(120): all case item expressions in this case statement are onehot File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/videoGen.sv Line: 120
-Info (12128): Elaborating entity "cardGrid_game" for hierarchy "videoGen_game:u_vgen|cardGrid_game:u_grid" File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/videoGen.sv Line: 34
-Warning (10230): Verilog HDL assignment warning at cardGrid_game.sv(65): truncated value with size 32 to match size of target (4) File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/cardGrid_game.sv Line: 65
-Warning (10230): Verilog HDL assignment warning at cardGrid_game.sv(94): truncated value with size 32 to match size of target (4) File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/cardGrid_game.sv Line: 94
-Info (278001): Inferred 2 megafunctions from design logic
-    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "videoGen_game:u_vgen|cardGrid_game:u_grid|Div0" File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/cardGrid_game.sv Line: 63
-    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "videoGen_game:u_vgen|cardGrid_game:u_grid|Div1" File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/cardGrid_game.sv Line: 64
-Info (12130): Elaborated megafunction instantiation "videoGen_game:u_vgen|cardGrid_game:u_grid|lpm_divide:Div0" File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/cardGrid_game.sv Line: 63
-Info (12133): Instantiated megafunction "videoGen_game:u_vgen|cardGrid_game:u_grid|lpm_divide:Div0" with the following parameter: File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/cardGrid_game.sv Line: 63
-    Info (12134): Parameter "LPM_WIDTHN" = "32"
-    Info (12134): Parameter "LPM_WIDTHD" = "9"
-    Info (12134): Parameter "LPM_NREPRESENTATION" = "SIGNED"
-    Info (12134): Parameter "LPM_DREPRESENTATION" = "SIGNED"
-    Info (12134): Parameter "LPM_HINT" = "LPM_REMAINDERPOSITIVE=FALSE"
-Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_fpo.tdf
-    Info (12023): Found entity 1: lpm_divide_fpo File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/db/lpm_divide_fpo.tdf Line: 25
-Info (12021): Found 1 design units, including 1 entities, in source file db/abs_divider_obg.tdf
-    Info (12023): Found entity 1: abs_divider_obg File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/db/abs_divider_obg.tdf Line: 29
-Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_00f.tdf
-    Info (12023): Found entity 1: alt_u_div_00f File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/db/alt_u_div_00f.tdf Line: 23
-Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_abs_on9.tdf
-    Info (12023): Found entity 1: lpm_abs_on9 File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/db/lpm_abs_on9.tdf Line: 23
-Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_abs_4p9.tdf
-    Info (12023): Found entity 1: lpm_abs_4p9 File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/db/lpm_abs_4p9.tdf Line: 23
-Info (12130): Elaborated megafunction instantiation "videoGen_game:u_vgen|cardGrid_game:u_grid|lpm_divide:Div1" File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/cardGrid_game.sv Line: 64
-Info (12133): Instantiated megafunction "videoGen_game:u_vgen|cardGrid_game:u_grid|lpm_divide:Div1" with the following parameter: File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/cardGrid_game.sv Line: 64
-    Info (12134): Parameter "LPM_WIDTHN" = "32"
-    Info (12134): Parameter "LPM_WIDTHD" = "8"
-    Info (12134): Parameter "LPM_NREPRESENTATION" = "SIGNED"
-    Info (12134): Parameter "LPM_DREPRESENTATION" = "SIGNED"
-    Info (12134): Parameter "LPM_HINT" = "LPM_REMAINDERPOSITIVE=FALSE"
-Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_epo.tdf
-    Info (12023): Found entity 1: lpm_divide_epo File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/db/lpm_divide_epo.tdf Line: 25
-Info (12021): Found 1 design units, including 1 entities, in source file db/abs_divider_nbg.tdf
-    Info (12023): Found entity 1: abs_divider_nbg File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/db/abs_divider_nbg.tdf Line: 29
-Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_uve.tdf
-    Info (12023): Found entity 1: alt_u_div_uve File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/db/alt_u_div_uve.tdf Line: 23
-Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_abs_nn9.tdf
-    Info (12023): Found entity 1: lpm_abs_nn9 File: C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/db/lpm_abs_nn9.tdf Line: 23
-Info (286030): Timing-Driven Synthesis is running
-Info (17049): 6 registers lost all their fanouts during netlist optimizations.
-Info (144001): Generated suppressed messages file C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/output_files/VGAFSM.map.smsg
-Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
-    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 1980 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 8 input pins
-    Info (21059): Implemented 60 output pins
-    Info (21061): Implemented 1904 logic cells
-    Info (21062): Implemented 8 DSP elements
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 4 warnings
-    Info: Peak virtual memory: 4934 megabytes
-    Info: Processing ended: Thu Oct 09 17:25:17 2025
-    Info: Elapsed time: 00:00:16
-    Info: Total CPU time (on all processors): 00:00:30
+Info (12128): Elaborating entity "pll" for hierarchy "pll:u_pll" File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memoria_fpga_top.sv Line: 32
+Info (12128): Elaborating entity "vgaController" for hierarchy "vgaController:u_vgac" File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memoria_fpga_top.sv Line: 43
+Info (12128): Elaborating entity "btn_debouncer" for hierarchy "btn_debouncer:u_db_start" File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memoria_fpga_top.sv Line: 55
+Info (12128): Elaborating entity "memory_game_top_bc" for hierarchy "memory_game_top_bc:u_game" File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memoria_fpga_top.sv Line: 88
+Info (12128): Elaborating entity "board_core" for hierarchy "memory_game_top_bc:u_game|board_core:u_board" File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memory_game_top_bc.sv Line: 173
+Info (12128): Elaborating entity "pair_check_rom" for hierarchy "memory_game_top_bc:u_game|pair_check_rom:u_pair" File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memory_game_top_bc.sv Line: 186
+Info (12128): Elaborating entity "memory_game_fsm_bc" for hierarchy "memory_game_top_bc:u_game|memory_game_fsm_bc:u_fsm" File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memory_game_top_bc.sv Line: 226
+Warning (10036): Verilog HDL or VHDL warning at memory_game_fsm_bc.sv(105): object "last_match" assigned a value but never read File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memory_game_fsm_bc.sv Line: 105
+Info (10264): Verilog HDL Case Statement information at memory_game_fsm_bc.sv(126): all case item expressions in this case statement are onehot File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memory_game_fsm_bc.sv Line: 126
+Info (12128): Elaborating entity "scoreboard_pairs" for hierarchy "memory_game_top_bc:u_game|scoreboard_pairs:u_score" File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memory_game_top_bc.sv Line: 238
+Info (12128): Elaborating entity "turn_leds" for hierarchy "turn_leds:u_leds" File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memoria_fpga_top.sv Line: 98
+Info (12128): Elaborating entity "hex7seg_active_low" for hierarchy "hex7seg_active_low:u_hex_p1" File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memoria_fpga_top.sv Line: 107
+Info (12128): Elaborating entity "videoGen_game" for hierarchy "videoGen_game:u_vgen" File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memoria_fpga_top.sv Line: 141
+Info (10264): Verilog HDL Case Statement information at videoGen.sv(113): all case item expressions in this case statement are onehot File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/videoGen.sv Line: 113
+Info (12128): Elaborating entity "cardGrid_game" for hierarchy "videoGen_game:u_vgen|cardGrid_game:u_grid" File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/videoGen.sv Line: 34
+Warning (10230): Verilog HDL assignment warning at cardGrid_game.sv(67): truncated value with size 32 to match size of target (4) File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/cardGrid_game.sv Line: 67
+Warning (10230): Verilog HDL assignment warning at cardGrid_game.sv(96): truncated value with size 32 to match size of target (4) File: C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/cardGrid_game.sv Line: 96
+Info (144001): Generated suppressed messages file C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/output_files/VGAFSM.map.smsg
+Info: Quartus Prime Analysis & Elaboration was successful. 0 errors, 4 warnings
+    Info: Peak virtual memory: 4784 megabytes
+    Info: Processing ended: Fri Oct 10 09:51:56 2025
+    Info: Elapsed time: 00:00:10
+    Info: Total CPU time (on all processors): 00:00:26
 
 
-+------------------------------------------+
-; Analysis & Synthesis Suppressed Messages ;
-+------------------------------------------+
-The suppressed messages can be found in C:/Users/ffuch/Documents/LAB3NUEVO/Lab3VGA+FSM/output_files/VGAFSM.map.smsg.
++--------------------------------------------+
+; Analysis & Elaboration Suppressed Messages ;
++--------------------------------------------+
+The suppressed messages can be found in C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/output_files/VGAFSM.map.smsg.
 
 

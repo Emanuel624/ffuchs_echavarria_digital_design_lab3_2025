@@ -297,7 +297,7 @@ module memory_game_fsm_bc (
 
             // Latch del índice a flippear en 
             if (ns == S_PREP_FLIP1) begin
-                idx_target <= (s==S_AUTO1) ? rnd_idx : sel_idx;
+                idx_target <= (s==S_AUTO1)	 ? rnd_idx : sel_idx;
             end
             if (ns == S_PREP_FLIP2) begin
                 idx_target <= (s==S_AUTO2) ? rnd_idx : sel_idx;
