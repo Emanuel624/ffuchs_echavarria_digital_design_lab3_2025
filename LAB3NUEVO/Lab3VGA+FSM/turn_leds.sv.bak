@@ -1,0 +1,30 @@
+module turn_leds #(
+  parameter int DIV = 25_000_000  // ~2 Hz con clk50=50MHz
+)(
+  input  logic clk50,
+  input  logic rst_n,
+  input  logic current_player,  // 0 = P1, 1 = P2
+  output logic [1:0] LEDR
+);
+  logic [$clog2(DIV)-1:0] cnt;
+  logic blink;
+
+  always_ff @(posedge clk50 or negedge rst_n) begin
+    if (!rst_n) begin
+      cnt   <= '0;
+      blink <= 1'b0;
+    end else begin
+      if (cnt == DIV-1) begin
+        cnt   <= '0;
+        blink <= ~blink;
+      end else begin
+        cnt <= cnt + 1'b1;
+      end
+    end
+  end
+
+  always_comb begin
+    LEDR = 2'b00;
+    LEDR[current_player] = blink;  // solo el LED del jugador activo parpadea
+  end
+endmodule

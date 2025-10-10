@@ -1,0 +1,115 @@
+m255
+K4
+z2
+!s11f vlog 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/simulation/modelsim
+vboard_core
+Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
+Z2 !s110 1760111531
+!i10b 1
+!s100 VFVCOTO>hH@O4a4ezQm?z3
+Z3 !s11b Dg1SIo80bB@j0V0VzS_@n1
+Ij@eR9LcFZLQHCLi7hAa_71
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+S1
+R0
+w1760085540
+8C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/board_core.sv
+FC:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/board_core.sv
+!i122 1
+L0 5 117
+Z5 OV;L;2020.1;71
+r1
+!s85 0
+31
+Z6 !s108 1760111531.000000
+!s107 C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/board_core.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM|C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/board_core.sv|
+!i113 1
+Z7 o-sv -work work
+Z8 !s92 -sv -work work {+incdir+C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM}
+Z9 tCvgOpt 0
+vmemory_game_fsm_bc
+R1
+!s110 1760111530
+!i10b 1
+!s100 YZ_@m[0YCW_hUAgzUcg5M1
+R3
+Ieg6ooU6]G?N^W_[kb6W:`0
+R4
+S1
+R0
+w1760084816
+8C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memory_game_fsm_bc.sv
+FC:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memory_game_fsm_bc.sv
+!i122 0
+L0 7 320
+R5
+r1
+!s85 0
+31
+!s108 1760111530.000000
+!s107 C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memory_game_fsm_bc.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM|C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memory_game_fsm_bc.sv|
+!i113 1
+R7
+R8
+R9
+vmemory_game_top_bc
+R1
+R2
+!i10b 1
+!s100 K?Ofhh>m[DVTz?jRUZe]D2
+R3
+I_g4WXzG672QG=H;M`4?A_0
+R4
+S1
+R0
+w1760086056
+8C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memory_game_top_bc.sv
+FC:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memory_game_top_bc.sv
+!i122 3
+L0 6 252
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memory_game_top_bc.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM|C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/memory_game_top_bc.sv|
+!i113 1
+R7
+R8
+R9
+vpair_check_rom
+R1
+R2
+!i10b 1
+!s100 K^1NojUn]=fcSmQe_jPc72
+R3
+Ij0=lfR;CYYKPccD?:`Kz<1
+R4
+S1
+R0
+w1760085535
+8C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/pair_check_rom.sv
+FC:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/pair_check_rom.sv
+!i122 2
+L0 5 35
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/pair_check_rom.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM|C:/Users/Usuario/Desktop/TEC II 2025/Taller_DD/laboratorio3/ffuchs_echavarria_digital_design_lab3_2025/LAB3NUEVO/Lab3VGA+FSM/pair_check_rom.sv|
+!i113 1
+R7
+R8
+R9
