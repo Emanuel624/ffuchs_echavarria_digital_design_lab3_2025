@@ -1,4 +1,5 @@
 // ===================== cardGrid_game.sv =====================
+// renderiza el grid de cartas 
 module cardGrid_game #(
     parameter int CARDS_X = 4,
     parameter int CARDS_Y = 4,
@@ -15,19 +16,20 @@ module cardGrid_game #(
 
     input  logic [15:0] faceup_mask,    // de board_core
     input  logic [15:0] removed_mask,   // de board_core
-    input  logic [3:0]  sel_idx,        // cursor actual (para highlight)
-    input  logic        show_winner,    // overlay de fin de juego (aplica “smoke”)
+    input  logic [3:0]  sel_idx,        // cursor actual 
+    input  logic        show_winner,    // overlay de fin de juego
 
     output logic [7:0]  r, g, b
 );
-    // ===== Viewport / grid =====
+    // ===== grid =====
     localparam int VP_X0 = MARGIN_L;
     localparam int VP_Y0 = MARGIN_T;
     localparam int VP_X1 = SCR_W - 1 - MARGIN_R;
     localparam int VP_Y1 = SCR_H - 1 - MARGIN_B;
     localparam int VP_W  = VP_X1 - VP_X0 + 1;
     localparam int VP_H  = VP_Y1 - VP_Y0 + 1;
-
+		
+	 // Tamaño de celda 
     localparam int W  = VP_W / CARDS_X;
     localparam int H  = VP_H / CARDS_Y;
     localparam int GX0 = VP_X0;
@@ -52,7 +54,7 @@ module cardGrid_game #(
         in_grid = (x >= GX0)   && (x <= GX1)   && (y >= GY0)   && (y <= GY1);
     end
 
-    // --------- Selección de carta (índice) ---------
+    // --------- Selección de carta  ---------
     integer relx, rely;
     integer cell_x, cell_y;
     logic   [3:0] card_ix;
@@ -77,7 +79,7 @@ module cardGrid_game #(
         in_border = in_card && ((ux < BORDER) || (ux >= W-BORDER) || (uy < BORDER) || (uy >= H-BORDER));
     end
 
-    // --------- Estado de carta (índice seguro) ---------
+    // --------- Estado de carta---------
     logic [3:0] ix_safe;
     logic is_face, is_removed, is_hidden;
 
@@ -89,7 +91,7 @@ module cardGrid_game #(
         is_hidden  = ~(is_face | is_removed);
     end
 
-    // --------- Símbolo (ROM 0..7 repetida) ---------
+    // --------- Símbolo---------
     logic [3:0] sym;
     always_comb sym = (card_ix < 8) ? card_ix : (card_ix - 8);
 
@@ -132,10 +134,10 @@ module cardGrid_game #(
 
         if (in_card && (is_face || is_removed)) begin
             unique case (sym_sel)
-              2'd0: if ((d2_tmp <= (R*R)) && (d2_tmp >= (R-TH)*(R-TH))) draw_symbol = 1'b1;
-              2'd1: if ((man_tmp >= (R-TH)) && (man_tmp <= R))          draw_symbol = 1'b1;
-              2'd2: if ((adx <= TH && ady <= R) || (ady <= TH && adx <= R)) draw_symbol = 1'b1;
-              default: if ((d1abs_tmp <= TH) || (d2abs_tmp <= TH))      draw_symbol = 1'b1;
+              2'd0: if ((d2_tmp <= (R*R)) && (d2_tmp >= (R-TH)*(R-TH))) draw_symbol = 1'b1; // anillo
+              2'd1: if ((man_tmp >= (R-TH)) && (man_tmp <= R))          draw_symbol = 1'b1; // rombo
+              2'd2: if ((adx <= TH && ady <= R) || (ady <= TH && adx <= R)) draw_symbol = 1'b1; // cruz
+              default: if ((d1abs_tmp <= TH) || (d2abs_tmp <= TH))      draw_symbol = 1'b1; // x
             endcase
         end
     end
@@ -145,7 +147,7 @@ module cardGrid_game #(
     always_comb sel_border = in_card && (card_ix == sel_idx) && !is_removed &&
                              ((ux < BORDER+2) || (ux >= W-(BORDER+2)) || (uy < BORDER+2) || (uy >= H-(BORDER+2)));
 
-    // --------- RGB OUT ---------
+    // --------- RGB ---------
     always_ff @(posedge vgaclk) begin
         if (!blank_b) begin
             r <= 8'd0; g <= 8'd0; b <= 8'd0;
@@ -167,7 +169,7 @@ module cardGrid_game #(
             r <= 8'd16; g <= 8'd60; b <= 8'd16;
         end
 
-        // “Smoke” al finalizar (opcional, mantiene coherencia visual)
+        // show winner
         if (show_winner && in_vp) begin
             r <= (r>>1) + 8'd80;
             g <= (g>>1) + 8'd10;

@@ -1,6 +1,6 @@
 //==============================================================
-// board_pair_top.sv  (TOP para TB de board_core + pair_check_rom)
-// - Actualizado: conecta idx_chk/can_flip_idx de board_core
+// board_pair_top.sv  
+// - conecta board_core y pair_check_rom 
 //==============================================================
 module board_pair_top (
     input  logic        clk,
@@ -13,7 +13,7 @@ module board_pair_top (
     input  logic        req_unflip,
     input  logic        req_remove_pair,
 
-    // ---- Handshakes/estados desde board_core ----
+    // ---- Handshakes desde board_core ----
     output logic        can_flip_sel,
     output logic        flip_ack,
     output logic        unflip_ack,
@@ -24,14 +24,14 @@ module board_pair_top (
     output logic [15:0] card_faceup,
     output logic [15:0] card_removed,
 
-    // ---- Consulta arbitraria para AUTO pick ----
+    // ---- AUTO pick ----
     input  logic [3:0]  idx_chk,       // índice a verificar
-    output logic        can_flip_idx,  // 1 si idx_chk es flippable
+    output logic        can_flip_idx,  // 1 si es flippable
 
     // ---- Señales para verificación de pareja ----
     input  logic [3:0]  idx_a,
     input  logic [3:0]  idx_b,
-    input  logic        pair_start,    // pulso/level, se detecta flanco interno en pair_check_rom
+    input  logic        pair_start,   
     output logic        pair_done,     // pulso 1 ciclo
     output logic        pair_match     // resultado
 );
@@ -54,8 +54,8 @@ module board_pair_top (
         .remove_ack      (remove_ack),
         .all_pairs_done  (all_pairs_done),
 
-        .idx_chk         (idx_chk),       // << nuevo
-        .can_flip_idx    (can_flip_idx),  // << nuevo
+        .idx_chk         (idx_chk),       
+        .can_flip_idx    (can_flip_idx),  
 
         .card_faceup     (card_faceup),
         .card_removed    (card_removed)

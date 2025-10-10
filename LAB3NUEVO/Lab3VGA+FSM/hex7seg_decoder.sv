@@ -1,6 +1,5 @@
 //==============================================================
-// Decoder HEX 0..F a 7 segmentos activo-en-bajo (abcdefg)
-// Compatible con DE10-Standard / DE1-SoC
+// Decoder HEX 0..F a 7 segmentos 
 //==============================================================
 module hex7seg_active_low (
     input  logic [3:0] hex,

@@ -1,10 +1,10 @@
-// Debouncer (sincroniza a clk y filtra durante N ciclos)
+// Debouncer simple (sincroniza a clk y filtra durante N ciclos)
 module btn_debouncer #(
   parameter integer CNTR_BITS = 18       // ~2.6 ms a 50 MHz
 )(
   input  logic clk,
   input  logic rst_n,
-  input  logic btn_n_raw,                // botón activo en bajo
+  input  logic btn_n_raw,                // botón activo en bajo típico de placa
   output logic level,                    // nivel estable (activo en alto)
   output logic rising_edge               // pulso 1 ciclo al presionar
 );
@@ -12,7 +12,7 @@ module btn_debouncer #(
   logic [CNTR_BITS-1:0] cnt_q;
   logic        stable_q;
 
-  // sincronizadores al clck
+  // sincronizadores
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
       btn_sync0 <= 1'b1;
@@ -23,7 +23,7 @@ module btn_debouncer #(
     end
   end
 
-  // filtro de rebotes
+  // filtro (cuenta mientras cambie)
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
       cnt_q    <= '0;
@@ -41,7 +41,7 @@ module btn_debouncer #(
     end
   end
 
-  // activo alto
+  // activo alto (invertimos porque btn_n_raw es activo-bajo)
   logic level_q, level_d;
   always_comb level_d = ~stable_q;
 

@@ -1,6 +1,6 @@
 //==============================================================
 // videoGen.sv
-// - Renderiza la grilla del juego y, al finalizar,
+// - Renderiza el grid del juego y, al finalizar,
 //   dibuja un dígito grande centrado:
 //     1 = gana P1, 2 = gana P2, 0 = empate
 //==============================================================
@@ -42,12 +42,12 @@ module videoGen_game(
     localparam int DX1  = DX0 + DW - 1;
     localparam int DY1  = DY0 + DH - 1;
 
-    // Parámetros del “7 segmentos”
+    // Parámetros 
     localparam int PAD  = 16;                     // margen interno
     localparam int TH   = 22;                     // grosor de segmento
 
     // Mapeo de winner_code -> dígito a mostrar
-    // 1->'1', 2->'2', 3->'0', otro -> “nada”
+    // 1->'1', 2->'2', 3->'0', otro -> nada
     logic [3:0] digit;
     always_comb begin
         unique case (winner_code)
@@ -72,14 +72,7 @@ module videoGen_game(
         end
     end
 
-    // Rectángulos de segmentos (A,B,C,D,E,F,G) dentro del dígito
-    //  A: top horizontal
-    //  D: bottom horizontal
-    //  G: middle horizontal
-    //  F: top-left vertical
-    //  E: bottom-left vertical
-    //  B: top-right vertical
-    //  C: bottom-right vertical
+    // Rectángulos de segmentos (A,B,C,D,E,F,G)para hacer los numeros
     logic inA, inB, inC, inD, inE, inF, inG;
     always_comb begin
         // defaults
@@ -127,7 +120,7 @@ module videoGen_game(
         endcase
     end
 
-    // ¿Dibujar pixel del dígito?
+    // Dibujar pixel del dígito?
     logic draw_digit;
     always_comb begin
         draw_digit = 1'b0;
@@ -143,7 +136,7 @@ module videoGen_game(
         end
     end
 
-    // Color del dígito (blanco brillante)
+    // Color del dígito 
     localparam [7:0] DIG_R = 8'd255, DIG_G = 8'd255, DIG_B = 8'd255;
 
     // ===================== composición final =====================

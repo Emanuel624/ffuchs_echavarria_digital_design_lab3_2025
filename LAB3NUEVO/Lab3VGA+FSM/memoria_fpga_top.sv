@@ -1,8 +1,10 @@
+// Un FSM + Logica + controlador VGA + 7seg + LEDS
+
 module memoria_fpga_top (
     input  logic        clk50,
-    input  logic [3:0]  SW,           // sel_idx[3:0]
-    input  logic        KEY0_n,       // START  (act-bajo)
-    input  logic        KEY1_n,       // CLICK  (act-bajo)
+    input  logic [3:0]  SW,           // switches para elegir posicion
+    input  logic        KEY0_n,       // START  
+    input  logic        KEY1_n,       // CLICK  
     input  logic        RESET_n,      // reset global act-bajo
 
     // VGA
@@ -15,11 +17,11 @@ module memoria_fpga_top (
     output logic        LED_P1,
     output logic        LED_P2,
 
-    // Pares por jugador (opcional en LEDs externos)
+    // Pares por jugador 
     output logic [3:0]  P1_PAIRS,
     output logic [3:0]  P2_PAIRS,
 
-    // 7 segmentos (activo-en-bajo): HEX0=P1, HEX1=P2, HEX2=contador (F..0)
+    // 7 segmentos (activo-en-bajo)
     output logic [6:0]  HEX0,
     output logic [6:0]  HEX1,
     output logic [6:0]  HEX2
@@ -40,7 +42,7 @@ module memoria_fpga_top (
         .y      (y)
     );
 
-    // ---------------- Front-end de entrada ----------------
+    // ---------------- entradas ----------------
     logic start_level, start_pulse;
     logic click_level, click_pulse;
 
@@ -68,7 +70,7 @@ module memoria_fpga_top (
     logic [1:0]  winner_code_o;
 
     memory_game_top_bc #(
-      .TICKS_PER_TURN(300) // ya no se usa; el timer real es 1 Hz interno
+      .TICKS_PER_TURN(300) //1 Hz interno
     ) u_game (
       .clk              (clk50),
       .rst_n            (RESET_n),
@@ -95,11 +97,10 @@ module memoria_fpga_top (
       .led_p2         (LED_P2)
     );
 
-    // Exporta contadores crudos (LEDs externos opcionales)
     assign P1_PAIRS = p1_pairs_o;
     assign P2_PAIRS = p2_pairs_o;
 
-    // ---------------- 7-seg: P1 -> HEX0, P2 -> HEX1 ----------------
+    // ---------------- 7-seg ----------------
     hex7seg_active_low u_hex_p1 (
       .hex (p1_pairs_o),
       .seg (HEX0)
@@ -110,8 +111,8 @@ module memoria_fpga_top (
       .seg (HEX1)
     );
 
-    // -------- 7-seg: contador en HEX (F..0) en HEX2 --------
-    // seconds_left_o cuenta 15→0; mostramos nibble bajo (saturado a 0xF)
+    // 7-seg: contador-
+    // seconds_left_o cuenta 15 a 0
     logic [3:0] sec_hex;
     always_comb begin
       if (seconds_left_o[7:4] != 4'd0) sec_hex = 4'hF;  // por seguridad si >15
@@ -123,7 +124,7 @@ module memoria_fpga_top (
       .seg (HEX2)
     );
 
-    // ---------------- Video de juego (con indicador de ganador) ----------------
+    // ---------------- Video de juego ----------------
     videoGen_game u_vgen (
         .vgaclk        (vgaclk),
         .blank_b       (blank_b),

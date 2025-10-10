@@ -1,5 +1,4 @@
 module vgaController #(
-// ----- Temporalizado VGA 640x480 @ ~60 Hz -----
     parameter HACTIVE = 10'd640,
               HFP     = 10'd16,
               HSYN    = 10'd96,
@@ -12,14 +11,13 @@ module vgaController #(
               VSYN    = 10'd2,
               VMAX    = VACTIVE + VFP + VSYN + VBP   // 525
 )(
-    input  logic       vgaclk,	// píxel clock
-    output logic       hsync, vsync,	// sincronías
+    input  logic       vgaclk,
+    output logic       hsync, vsync,
     output logic       sync_b, blank_b,
     output logic [9:0] x, y
 );
     initial begin x=10'd0; y=10'd0; end
 
-	 // Generador de coordenadas
     // x:0..799  y:0..524
     always_ff @(posedge vgaclk) begin
         if (x == HMAX-1) begin
@@ -29,8 +27,7 @@ module vgaController #(
             x <= x + 10'd1;
         end
     end
-	
-	// sincronías
+
     assign hsync   = ~((x >= HACTIVE + HFP) && (x < HACTIVE + HFP + HSYN)); // activo-bajo
     assign vsync   = ~((y >= VACTIVE + VFP) && (y < VACTIVE + VFP + VSYN)); // activo-bajo
     assign sync_b  = hsync & vsync;

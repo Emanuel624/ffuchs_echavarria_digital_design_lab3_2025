@@ -1,5 +1,10 @@
+//==============================================================
+// memory_game_top_bc.sv
+// Top que une logica + fms
+//==============================================================
+
 module memory_game_top_bc #(
-  parameter int TICKS_PER_TURN = 300   // (ya no se usa con el timer 1 Hz)
+  parameter int TICKS_PER_TURN = 300   
 )(
   input  logic        clk,
   input  logic        rst_n,
@@ -9,7 +14,7 @@ module memory_game_top_bc #(
   input  logic        click_e,
   input  logic [3:0]  sel_idx,
 
-  // Observación/estado
+  // estado
   output logic        show_winner_o,
   output logic [15:0] card_faceup_o,
   output logic [15:0] card_removed_o,
@@ -39,7 +44,7 @@ module memory_game_top_bc #(
   logic        show_winner;
   logic [5:0]  state_dbg;
 
-  // Handshakes con board_core
+  //  Con board_core
   logic        req_flip, req_unflip, req_remove;
   logic [3:0]  act_idx;
   logic        flip_ack, unflip_ack, remove_ack;
@@ -54,7 +59,7 @@ module memory_game_top_bc #(
   // ----------------------------
   // Temporizador de turno (1 Hz)
   // ----------------------------
-  // Declaraciones (deben existir antes de usarlas en los always)
+  // Declaraciones 
   logic        running_q;
   logic [7:0]  seconds_q;       // 0..99 (usamos 15..0)
   assign seconds_left_o = seconds_q;
@@ -64,6 +69,7 @@ module memory_game_top_bc #(
   logic [25:0] ps_cnt_q;
   logic        tick_1hz;
 
+  // si el juego está pausado o el timer no corre, resetea el conteo
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
       ps_cnt_q <= '0;
@@ -82,7 +88,7 @@ module memory_game_top_bc #(
     end
   end
 
-  // Contador de segundos y 'timer_done'
+  // Contador de segundos y timer_done
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
       running_q  <= 1'b0;
@@ -96,12 +102,12 @@ module memory_game_top_bc #(
         seconds_q <= 8'd0;
 
       end else if (turn_load_15) begin
-        // Carga y, si 'turn_start' viene alto en el mismo ciclo, arranca.
+        //  viene alto en el mismo ciclo, arranca.
         seconds_q <= 8'd15;
         running_q <= turn_start ? 1'b1 : running_q;
 
       end else begin
-        // Si la FSM decide "start" en ciclo aparte, respétalo
+        // Si la FSM decide "start" 
         if (turn_start) running_q <= 1'b1;
 
         if (running_q && !turn_pause && tick_1hz) begin
@@ -120,6 +126,9 @@ module memory_game_top_bc #(
   logic [3:0] lfsr_q, lfsr_d, rnd_idx;
   logic       rnd_valid;
 
+  // Registro del LFSR 
+  // - Se inicializa en una semilla NO CERO (4'hA).
+  // - Cada ciclo, lfsr_q toma lfsr_d (el siguiente estado del LFSR).
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) lfsr_q <= 4'hA;
     else        lfsr_q <= lfsr_d;
@@ -130,6 +139,9 @@ module memory_game_top_bc #(
     rnd_idx   = lfsr_q;
     rnd_valid = 1'b0;
     if (enable_random) begin
+	 // Avance de 4-bit LFSR
+    // - lfsr_d[0] = XOR(taps)
+    // - El resto es corrimiento a la izquierda (LSB entra con el XOR)
       lfsr_d    = {lfsr_q[2:0], lfsr_q[3]^lfsr_q[1]};
       rnd_idx   = lfsr_d;
       rnd_valid = 1'b1;
@@ -139,7 +151,7 @@ module memory_game_top_bc #(
   // ----------------------------
   // board_core
   // ----------------------------
-  logic can_flip_idx; // consulta para rnd_idx
+  logic can_flip_idx; 
 
   board_core u_board (
     .clk            (clk),
@@ -154,8 +166,8 @@ module memory_game_top_bc #(
     .unflip_ack     (unflip_ack),
     .remove_ack     (remove_ack),
     .all_pairs_done (all_pairs_done),
-    .idx_chk        (rnd_idx),          // consulta el índice aleatorio actual
-    .can_flip_idx   (can_flip_idx),     // respuesta combinacional
+    .idx_chk        (rnd_idx),          // consulta el índice
+    .can_flip_idx   (can_flip_idx),     
     .card_faceup    (card_faceup_o),
     .card_removed   (card_removed_o)
   );

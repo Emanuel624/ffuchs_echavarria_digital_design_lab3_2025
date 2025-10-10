@@ -1,5 +1,6 @@
 //==============================================================
 // board_core.sv
+// logica operaciones con cartas (flips, etc.)
 //==============================================================
 module board_core #(
     parameter int N_CARDS = 16

@@ -3,14 +3,13 @@
 // - Cuenta parejas por jugador.
 // - Resetea con rst_n=0 o start_game=1.
 // - Incrementa en update_score (según current_player).
-// - Opcional: congela cuando show_winner=1.
 //==============================================================
 module scoreboard_pairs (
   input  logic       clk,
   input  logic       rst_n,
 
   // Control
-  input  logic       start_game,       // pulso/level al iniciar juego
+  input  logic       start_game,       // pulso iniciar juego
   input  logic       update_score,     // pulso 1 ciclo por pareja encontrada
   input  logic       current_player,   // 0=P1, 1=P2
   input  logic       show_winner,      // 1 cuando terminó el juego (congela)
@@ -20,7 +19,7 @@ module scoreboard_pairs (
   output logic [3:0] p2_pairs
 );
 
-  // Reset sincrónico por start_game + reset asíncrono por rst_n
+  // Reset sincrónico por start_game + reset por rst_n
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
       p1_pairs <= 4'd0;

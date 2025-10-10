@@ -1,4 +1,6 @@
 // turn_leds.sv
+// hace parpadear el LED del jugador activo mientras el juego está en curso.
+
 module turn_leds (
   input  logic clk,
   input  logic rst_n,
@@ -7,7 +9,7 @@ module turn_leds (
   output logic led_p1,
   output logic led_p2
 );
-  logic [25:0] div_q;  // ~0.7 Hz @50MHz (ajusta el bit para variar la frecuencia)
+  logic [25:0] div_q;  // ~0.7 Hz @50MHz 
   logic        blink;
 
   always_ff @(posedge clk or negedge rst_n) begin
@@ -15,8 +17,10 @@ module turn_leds (
     else        div_q <= div_q + 26'd1;
   end
 
+  // Señal de parpadeo
   assign blink = div_q[25];
 
+  // Selección de LED según jugador activo
   always_comb begin
     led_p1 = 1'b0;
     led_p2 = 1'b0;
